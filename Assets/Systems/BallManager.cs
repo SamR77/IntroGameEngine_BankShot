@@ -24,22 +24,14 @@ public class BallManager : MonoBehaviour
 
     private void SetCameraLookInput(Vector2 vector)
     {
-        lookInput = new Vector2(vector.x, vector.y);
+       
     }
 
 
 
-    void OnEnable()
-    {
-       inputManager.CameraLookEvent += SetCameraLookInput;
-    }
 
 
 
-    private void OnDestroy()
-    {
-        inputManager.CameraLookEvent -= SetCameraLookInput;
-    }
 
 
 
