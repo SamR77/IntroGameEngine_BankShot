@@ -97,7 +97,7 @@ public class BallManager : MonoBehaviour
 
         else if (other.gameObject.tag == "ResetTrigger")
         {
-            SetBallToStartPosition();
+            //SetBallToStartPosition();
         }
     }
 
