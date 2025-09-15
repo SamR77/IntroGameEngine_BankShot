@@ -26,9 +26,8 @@ public class GameStateManager : MonoBehaviour
 
     // Instantiate game state objects
     public GameState_Init gameState_Init = GameState_Init.Instance;
-
     public GameState_Aim gameState_Aim = GameState_Aim.Instance;
-
+    public GameState_Rolling gameState_Rolling = GameState_Rolling.Instance;
 
 
     private void Start()

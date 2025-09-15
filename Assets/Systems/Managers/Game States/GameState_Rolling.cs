@@ -1,7 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameState_Aim : IGameState
+public class GameState_Rolling : IGameState
 {
     GameManager gameManager => GameManager.Instance;
     InputManager inputManager => GameManager.Instance.InputManager;
@@ -13,11 +12,11 @@ public class GameState_Aim : IGameState
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.
     // The 'readonly' keyword ensures this instance cannot be modified after initialization.
-    private static readonly GameState_Aim _instance = new GameState_Aim();
+    private static readonly GameState_Rolling _instance = new GameState_Rolling();
 
     // Provides global access to the singleton instance of this state.
     // Uses an expression-bodied property to return the static _instance variable.
-    public static GameState_Aim Instance => _instance;
+    public static GameState_Rolling Instance => _instance;
     #endregion
 
     public void EnterState()
@@ -28,22 +27,19 @@ public class GameState_Aim : IGameState
         cameraManager.EnableBallCamera();
         cameraManager.EnableCameraOrbit();
 
-        ballManager.aimGuide.SetActive(true); 
 
-        inputManager.ShootEvent += ballManager.ShootBall;
+        // Start the coroutine to check if the ball has stopped after a delay
+        ballManager.StartCoroutine(ballManager.CheckBallStoppedAfterDelay());
+
     }
-
-   
 
     public void FixedUpdateState()
     {
-        
+
     }
 
     public void UpdateState()
     {
-        
-        ballManager.HandleAimGuide();
 
     }
 
@@ -55,10 +51,7 @@ public class GameState_Aim : IGameState
 
     public void ExitState()
     {
-
-        ballManager.aimGuide.SetActive(false); // disable aim guide while ball is rolling
-
-        inputManager.ShootEvent -= ballManager.ShootBall;
+        
     }
 
 }

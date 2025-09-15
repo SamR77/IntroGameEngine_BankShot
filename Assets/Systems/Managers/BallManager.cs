@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // Sam Robichaud 
 // NSCC Truro 2025
@@ -11,10 +12,13 @@ public class BallManager : MonoBehaviour
     [Header("Manager References")]
 
     GameManager gameManager => GameManager.Instance;
+
     BallManager ballManager => GameManager.Instance.BallManager;
     CameraManager cameraManager => GameManager.Instance.CameraManager;
+    GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
+    InputManager inputManager => GameManager.Instance.InputManager;        
     UIManager UIManager => GameManager.Instance.UIManager;
-
+    
 
 
     [Header("References")]
@@ -46,13 +50,18 @@ public class BallManager : MonoBehaviour
         ballVelocityMagnitude = rb_ball.linearVelocity.magnitude;
     }
 
-    public void ballShoot() // adds force to ball in a direction away from camera
+    public void ShootBall(InputAction.CallbackContext context) // adds force to ball in a direction away from camera
     {
-        gameManager.shotsLeft -= 1;
-        //UIManager.instance.UpdateShotsleft(gameManager.shotsLeft);
+        if (context.started)
+        {
+            gameManager.shotsLeft -= 1;
+            // UIManager.instance.UpdateShotsleft(gameManager.shotsLeft);
 
-        ballStopped = false; // the ball should be moving at this point
-        rb_ball.AddForce(aimGuide.transform.forward * 25, ForceMode.VelocityChange);
+            ballStopped = false; // the ball should be moving at this point
+            rb_ball.AddForce(aimGuide.transform.forward * 25, ForceMode.VelocityChange);
+
+            gameStateManager.SwitchToState(GameState_Rolling.Instance);
+        }        
     }
 
     public IEnumerator CheckBallStoppedAfterDelay()
@@ -67,6 +76,9 @@ public class BallManager : MonoBehaviour
             {
                 StopBall(); // Stop the ball
                 ballStopped = true;
+
+                gameManager.CheckForRemainingShots();
+
                 yield break; // Exit the coroutine as the check is complete
             }
 
