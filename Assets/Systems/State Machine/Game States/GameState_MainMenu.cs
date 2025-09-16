@@ -24,7 +24,7 @@ public class GameState_MainMenu : IGameState
         Cursor.visible = true;
 
 
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
         
 
 

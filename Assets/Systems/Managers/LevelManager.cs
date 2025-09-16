@@ -17,10 +17,7 @@ public class LevelManager : MonoBehaviour
     InputManager inputManager => GameManager.Instance.InputManager;
     UIManager uIManager => GameManager.Instance.UIManager;
 
-
-
-
-    public int nextScene;
+    private int nextScene;
 
     public void LoadNextLevel()
     {
@@ -82,11 +79,11 @@ public class LevelManager : MonoBehaviour
         if (scene.buildIndex > 0)
         {
             // Get a reference to the level info Script for that level
-            LevelInfo _levelInfo = FindObjectOfType<LevelInfo>();
+            LevelInfo levelInfo = FindObjectOfType<LevelInfo>();
 
             // Get the # shots(attempts) available for the level and update the UI
-            gameManager.shotsLeft = _levelInfo.ShotsToComplete;
-            // uIManager.UpdateShotsleft(_levelInfo.ShotsToComplete);
+            gameManager.shotsLeft = levelInfo.ShotsToComplete;
+            // uIManager.UpdateShotsleft(levelInfo.ShotsToComplete);
 
             // Update the current level # on the UI
             // uIManager.UpdateLevelCount(LevelCount);
@@ -96,7 +93,7 @@ public class LevelManager : MonoBehaviour
             //Debug.Break();
 
             // Set the camera to the current level start position
-            // cameraManager.ResetCameraPosition();
+            cameraManager.ResetCameraPosition();
         }
 
         else if (scene.buildIndex == 0)

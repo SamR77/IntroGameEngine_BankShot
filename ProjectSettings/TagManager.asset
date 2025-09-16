@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ball
   - GoalTrigger
+  - ResetTrigger
+  - BallSpawnPoint
   layers:
   - Default
   - TransparentFX

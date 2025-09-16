@@ -18,16 +18,16 @@ public class MainMenuBallRespawner : MonoBehaviour
     [SerializeField] private int InitialSpawnXmax = 25;
     [SerializeField] private int InitialSpawnYmin = 2;
     [SerializeField] private int InitialSpawnYmax = 6;
-    [SerializeField] private int InitialSpawnZmin = -28;
-    [SerializeField] private int InitialSpawnZmax = -34;
+    [SerializeField] private int InitialSpawnZmin = 28;
+    [SerializeField] private int InitialSpawnZmax = 34;
 
     [Header("Respawn Area")]
     [SerializeField] private int respawnXmin = -25;
     [SerializeField] private int RespawnXmax = 25;
     [SerializeField] private int RespawnYmin = 7;
     [SerializeField] private int RespawnYmax = 10;
-    [SerializeField] private int RespawnZmin = -40;
-    [SerializeField] private int RespawnZmax = -45;
+    [SerializeField] private int RespawnZmin = 40;
+    [SerializeField] private int RespawnZmax = 45;
 
 
    

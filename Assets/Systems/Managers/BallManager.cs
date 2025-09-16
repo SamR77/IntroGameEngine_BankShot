@@ -97,7 +97,7 @@ public class BallManager : MonoBehaviour
 
         else if (other.gameObject.tag == "ResetTrigger")
         {
-            //SetBallToStartPosition();
+            SetBallToStartPosition();
         }
     }
 
@@ -118,11 +118,11 @@ public class BallManager : MonoBehaviour
     {
         //  Find Start Position object in current scene
 
-        //  Transform startPosition = GameObject.FindWithTag("BallStartPosition").transform;
+        Transform startPosition = GameObject.FindWithTag("BallSpawnPoint").transform;
 
         StopBall(); // Stop the ball   
-        // rb_ball.position = startPosition.transform.position;
-        // rb_ball.rotation = startPosition.transform.rotation;
+        rb_ball.position = startPosition.transform.position;
+        rb_ball.rotation = startPosition.transform.rotation;
 
 
         // ** Bugfix by Daniel Nascimento **
@@ -133,8 +133,8 @@ public class BallManager : MonoBehaviour
         // transform here as well.
 
 
-        // rb_ball.transform.position = startPosition.transform.position;
-        // rb_ball.transform.rotation = startPosition.transform.rotation;
+        rb_ball.transform.position = startPosition.transform.position;
+        rb_ball.transform.rotation = startPosition.transform.rotation;
     }
 
 

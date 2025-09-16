@@ -149,6 +149,18 @@ public class CameraManager : MonoBehaviour
         menuCamera.enabled = false;
     }
 
+    public void ResetCameraPosition()
+    {
+        Debug.Log("Called Reset Camera Position in CameraManager, Logic not yet set");
+
+        //var offset = freeLookCamera.LookAt.rotation * new Vector3(0, 0, -14);
+
+        //freeLookCamera.ForceCameraPosition(freeLookCamera.LookAt.position + offset, freeLookCamera.LookAt.rotation);
+        //freeLookCamera.m_YAxis.Value = 0.5f;
+    }
+
+
+
     void OnEnable()
     {
         inputManager.RotateCameraEvent += SetRotationInput;
