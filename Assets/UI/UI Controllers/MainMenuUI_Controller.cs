@@ -6,8 +6,12 @@ public class MainMenuUI_Controller : MonoBehaviour
     UIDocument mainMenuUI => GetComponent<UIDocument>();
 
     GameManager gameManager => GameManager.Instance;
-    LevelManager levelManager => GameManager.Instance.LevelManager;
+
+    BallManager ballManager => GameManager.Instance.BallManager;
+    CameraManager cameraManager => GameManager.Instance.CameraManager;
+    UIManager uIManager => GameManager.Instance.UIManager;
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
+    LevelManager levelManager => GameManager.Instance.LevelManager;
 
     Button playButton;
     Button optionsButton;
@@ -45,7 +49,7 @@ public class MainMenuUI_Controller : MonoBehaviour
     private void OnPlayButtonClicked()
     {
         Debug.Log("Play Button Clicked");
-        levelManager.ActivateLevel(1);
+        levelManager.LoadScene(1);
         gameStateManager.SwitchToState(GameState_Aim.Instance);
     }
 

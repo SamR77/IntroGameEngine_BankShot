@@ -5,77 +5,109 @@
 using System;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    // have a Script attached to Parent Object that Holds levels
-    // Will scan through its children and find all instances of LevelInfo
-    // Will load each Level into an array
-    // Level Manager will connect to Parent Level Object, and... then use that reference to load levels?
 
-    [SerializeField] private Transform levelsParent;
-    public GameObject[] levels;
-
-    private int currentLevelIndex = -1; // -1 = none active
+    GameManager gameManager => GameManager.Instance;
+    BallManager ballManager => GameManager.Instance.BallManager;
+    CameraManager cameraManager => GameManager.Instance.CameraManager;
+    GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
+    InputManager inputManager => GameManager.Instance.InputManager;
+    UIManager uIManager => GameManager.Instance.UIManager;
 
 
-    private void Awake()
+
+
+    public int nextScene;
+
+    public void LoadNextLevel()
     {
+        nextScene = SceneManager.GetActiveScene().buildIndex + 1;
 
-        // Add all levels under levelsParent to levels[] array
-        int count = levelsParent.childCount;
-        levels = new GameObject[count];
-        for (int i = 0; i < count; i++)
+        if (nextScene <= SceneManager.sceneCountInBuildSettings)
         {
-            levels[i] = levelsParent.GetChild(i).gameObject;
-            levels[i].SetActive(false);
+            LoadScene(nextScene);
+        }
+
+        else if (nextScene > SceneManager.sceneCountInBuildSettings)
+        {
+            Debug.Log("All levels complete!");
         }
     }
 
-    // Deactivate all levels
-    public void DeactivateAllLevels()
+    public void LoadScene(int sceneId)
     {
-        for (int i = 0; i < levels.Length; i++)
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(sceneId);
+
+
+        if (sceneId == 0) // Loading Main Menu
         {
-            levels[i].SetActive(false);
+            gameStateManager.SwitchToState(GameState_MainMenu.Instance);
+        }
+        else // Gameplay level
+        {
+            gameStateManager.SwitchToState(GameState_Aim.Instance);
         }
     }
 
-    // Activate a specific level (index) after deactivating everything
-    public void ActivateLevel(int index)
+    public void LoadMainMenuScene()
     {
-        DeactivateAllLevels();
-
-        if (index >= 0 && index < levels.Length)
-        {
-            levels[index].SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning($"Level index {index} out of range!");
-        }
+        LoadScene(0);
+        gameStateManager.SwitchToState(GameState_Init.Instance);
     }
 
-    public void ActivateNextLevel()
+    public void ReloadCurrentScene()
     {
-        int nextIndex = currentLevelIndex + 1;
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameStateManager.SwitchToState(GameState_Aim.Instance);
 
-        // wrap around or clamp depending on desired behaviour:
-        if (nextIndex >= levels.Length)
+        // this corrects an issue when scene is reloaded, input stops responding... re-initializes the Input Map?
+        // InputManager.instance.SetActionMap_Gameplay();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        int LevelCount = SceneManager.GetActiveScene().buildIndex;
+        //Debug.Log("Scene Loaded: " + scene.name + " Build Index: " + scene.buildIndex);
+
+        if (scene.buildIndex > 0)
         {
-            Debug.Log("No more levels!");
-            return;
+            // Get a reference to the level info Script for that level
+            LevelInfo _levelInfo = FindObjectOfType<LevelInfo>();
+
+            // Get the # shots(attempts) available for the level and update the UI
+            gameManager.shotsLeft = _levelInfo.ShotsToComplete;
+            // uIManager.UpdateShotsleft(_levelInfo.ShotsToComplete);
+
+            // Update the current level # on the UI
+            // uIManager.UpdateLevelCount(LevelCount);
+
+            // Set the ball to the current level start position           
+            ballManager.SetBallToStartPosition();
+            //Debug.Break();
+
+            // Set the camera to the current level start position
+            // cameraManager.ResetCameraPosition();
         }
 
-        ActivateLevel(nextIndex);
+        else if (scene.buildIndex == 0)
+        {
+            // Noting really needed here, buildIndex 0 = MainMenu scene,
+            // Which would be loaded with via 'LoadMainMenuScene' which also switches to the GameInitState which handles all the prep/resetting for the MainMenu.
+            // Leaving this here in case of debugging or future use.
+        }
+        // (Unsuscribe) Stop listening for sceneLoaded event
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-
-    public void ResetCurrentLevel()
-    {
-        DeactivateAllLevels();
-        ActivateLevel(currentLevelIndex);
-    }
-
 
 
 }

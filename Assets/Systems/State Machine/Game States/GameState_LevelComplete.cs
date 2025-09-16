@@ -1,12 +1,18 @@
+// Sam Robichaud 
+// NSCC Truro 2025
+// This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
 using UnityEngine;
 
 public class GameState_LevelComplete : IGameState
 {
     GameManager gameManager => GameManager.Instance;
+
     BallManager ballManager => GameManager.Instance.BallManager;
     CameraManager cameraManager => GameManager.Instance.CameraManager;
     UIManager uIManager => GameManager.Instance.UIManager;
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
+    LevelManager levelManager => GameManager.Instance.LevelManager;
 
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.

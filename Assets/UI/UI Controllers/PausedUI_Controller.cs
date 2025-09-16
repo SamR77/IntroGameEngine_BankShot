@@ -60,7 +60,7 @@ public class PausedUI_Controller : MonoBehaviour
 
     private void OnRestartButtonClicked()
     {
-        levelManager.ResetCurrentLevel();
+        levelManager.ReloadCurrentScene();
     }
 
     private void OnOptionsButtonClicked()

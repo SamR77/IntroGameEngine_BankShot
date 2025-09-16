@@ -1949,51 +1949,6 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
---- !u!1 &379273185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 379273187}
-  - component: {fileID: 379273186}
-  m_Layer: 0
-  m_Name: Level Info
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &379273186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379273185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7dddd45fe9fbd644996f05103b1a16d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShotsToComplete: 0
---- !u!4 &379273187
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379273185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5616128, y: -6.3507867, z: 2.2536025}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &485255202
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,7 +3359,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 284ad2be4cb665241936b3da848cc930, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 0
+  levelsParent: {fileID: 0}
+  levels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!43 &839819390
 Mesh:
   m_ObjectHideFlags: 0
@@ -6549,4 +6510,3 @@ SceneRoots:
   - {fileID: 505702790}
   - {fileID: 608247359}
   - {fileID: 1646709809}
-  - {fileID: 379273187}

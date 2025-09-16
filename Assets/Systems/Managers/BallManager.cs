@@ -22,7 +22,7 @@ public class BallManager : MonoBehaviour
 
 
     [Header("References")]
-    public GameObject ball;  // Ball Mesh?
+    public GameObject ballMesh;  // Ball Mesh?
     public Rigidbody rb_ball;
     public GameObject aimGuide;
 
@@ -91,7 +91,7 @@ public class BallManager : MonoBehaviour
         if (other.gameObject.tag == "GoalTrigger")
         {
             Debug.Log("Goal Reached");
-            //GameStateManager.instance.SwitchToState(GameState_LevelComplete.instance);
+            gameStateManager.SwitchToState(GameState_LevelComplete.Instance);
             return;
         }
 
@@ -116,12 +116,13 @@ public class BallManager : MonoBehaviour
 
     public void SetBallToStartPosition()
     {
-        // Find Start Position object in current scene
-        Transform startPosition = GameObject.FindWithTag("BallStartPosition").transform;
+        //  Find Start Position object in current scene
+
+        //  Transform startPosition = GameObject.FindWithTag("BallStartPosition").transform;
 
         StopBall(); // Stop the ball   
-        rb_ball.position = startPosition.transform.position;
-        rb_ball.rotation = startPosition.transform.rotation;
+        // rb_ball.position = startPosition.transform.position;
+        // rb_ball.rotation = startPosition.transform.rotation;
 
 
         // ** Bugfix by Daniel Nascimento **
@@ -130,8 +131,10 @@ public class BallManager : MonoBehaviour
         // when cinemachine tries to get the rotation to adjust the camera
         // the rotation hasn't changed yet. So I'm setting it in the
         // transform here as well.
-        rb_ball.transform.position = startPosition.transform.position;
-        rb_ball.transform.rotation = startPosition.transform.rotation;
+
+
+        // rb_ball.transform.position = startPosition.transform.position;
+        // rb_ball.transform.rotation = startPosition.transform.rotation;
     }
 
 

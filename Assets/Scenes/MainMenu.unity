@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 140769728}
   - component: {fileID: 140769727}
   m_Layer: 0
-  m_Name: Walls
+  m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1949,51 +1949,6 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
---- !u!1 &379273185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 379273187}
-  - component: {fileID: 379273186}
-  m_Layer: 0
-  m_Name: Level Info
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &379273186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379273185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7dddd45fe9fbd644996f05103b1a16d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShotsToComplete: 0
---- !u!4 &379273187
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 379273185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5616128, y: -6.3507867, z: 2.2536025}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &485255202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2071,6 +2026,7 @@ Transform:
   m_Children:
   - {fileID: 140769726}
   - {fileID: 2040845192}
+  - {fileID: 3274299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &585159807
@@ -2155,38 +2111,6 @@ Transform:
   m_Children:
   - {fileID: 203844589}
   - {fileID: 2116198339}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &608247358
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 608247359}
-  m_Layer: 0
-  m_Name: Triggers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &608247359
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608247358}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 3274299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &771263030
@@ -3726,7 +3650,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3752,8 +3676,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.1521234, y: 0, z: 0, w: 0.98836154}
+  m_LocalPosition: {x: 0, y: 3.5070581, z: -9.537169}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4040,7 +3964,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 608247359}
+    m_TransformParent: {fileID: 505702790}
     m_Modifications:
     - target: {fileID: 1449750644323208443, guid: 1d9422b5c8bf072429428cf97c0ef56f, type: 3}
       propertyPath: m_Mesh
@@ -4303,6 +4227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1503422765}
   - component: {fileID: 1503422766}
+  - component: {fileID: 1503422767}
   m_Layer: 0
   m_Name: LevelComplete_UI
   m_TagString: Untagged
@@ -4344,6 +4269,18 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &1503422767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503422764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c67e238f227e60c48be298a0aa993d39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1528437793
 GameObject:
   m_ObjectHideFlags: 0
@@ -5453,7 +5390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1825808659
 Transform:
   m_ObjectHideFlags: 0
@@ -5483,7 +5420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57533081018ddee4181c7dd9971e9b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 1458623060}
+  ballMesh: {fileID: 1013460325}
   rb_ball: {fileID: 1825808662}
   aimGuide: {fileID: 1851270812}
   ballStopped: 0
@@ -6030,7 +5967,7 @@ GameObject:
   - component: {fileID: 2040845194}
   - component: {fileID: 2040845193}
   m_Layer: 0
-  m_Name: Floor
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6547,6 +6484,4 @@ SceneRoots:
   - {fileID: 1160234427}
   - {fileID: 604712594}
   - {fileID: 505702790}
-  - {fileID: 608247359}
   - {fileID: 1646709809}
-  - {fileID: 379273187}
