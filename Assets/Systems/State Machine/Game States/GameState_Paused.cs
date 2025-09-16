@@ -1,7 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameState_Init : IGameState
+public class GameState_Paused : IGameState
 {
     GameManager gameManager => GameManager.Instance;
     BallManager ballManager => GameManager.Instance.BallManager;
@@ -12,29 +11,26 @@ public class GameState_Init : IGameState
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.
     // The 'readonly' keyword ensures this instance cannot be modified after initialization.
-    private static readonly GameState_Init _instance = new GameState_Init();
+    private static readonly GameState_Paused _instance = new GameState_Paused();
 
     // Provides global access to the singleton instance of this state.
     // Uses an expression-bodied property to return the static _instance variable.
-    public static GameState_Init Instance => _instance;
+    public static GameState_Paused Instance => _instance;
     #endregion
 
     public void EnterState()
     {
-        // Hide cursor and lock it to the center of the screen
-        Cursor.visible = false;
+        Cursor.visible = true;
 
-        // Set timescale to 0f;
         Time.timeScale = 0f;
-        
-        // disable all Cinemachine cameras
-        cameraManager.DisableAllCameras();
 
+        cameraManager.DisableCameraOrbit();
+        
 
         // hide all UI Menus
+        uIManager.ShowPausedUI();
 
-        // Switch over to default starting state
-        gameStateManager.SwitchToState(GameState_Aim.Instance);
+        // Start Listening for Pause Input to resume
     }
 
   

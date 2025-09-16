@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style%20Sheets/Menu_SS.uss?fileID=7433441132597879392&amp;guid=a3200a47e8d50ea4cb7ea4fa184a14b1&amp;type=3#Menu_SS" />
+    <ui:VisualElement name="VisualElement" style="align-self: center; width: 100%;">
+        <ui:Label text="SKILL&#10;SHOOTER" name="Title_label" class="maintitle-label" style="width: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 100px; padding-right: 0; padding-bottom: 50px; padding-left: 0;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="MenuButtons" style="width: 400px; align-self: center; justify-content: space-around; padding-bottom: 100px; padding-top: 50px; flex-grow: 1;">
+        <ui:Button text="Play" name="Play_button" class="menu-button" />
+        <ui:Button text="Options" name="Options_button" class="menu-button" />
+        <ui:Button text="Quit" name="Quit_button" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

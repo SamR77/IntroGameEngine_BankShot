@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style%20Sheets/Menu_SS.uss?fileID=7433441132597879392&amp;guid=a3200a47e8d50ea4cb7ea4fa184a14b1&amp;type=3#Menu_SS" />
+    <ui:VisualElement name="Background" style="background-color: rgba(0, 0, 0, 0.51); position: absolute; top: -7px; left: 2px; bottom: 9px; right: -1px;" />
+    <ui:VisualElement name="PauseTitle" style="flex-grow: 1; width: 100%; align-self: center; justify-content: flex-end; align-items: center; height: 30%;">
+        <ui:Label text="Options" name="Title_label" class="title-label" style="width: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 75px; padding-left: 0; color: rgb(255, 255, 255);" />
+    </ui:VisualElement>
+    <ui:VisualElement name="MenuButtons" style="flex-grow: 1; width: 400px; align-self: center; justify-content: flex-start; padding-bottom: 100px; height: 30%; align-items: center;">
+        <ui:Button text="Back" name="Back_button" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>
