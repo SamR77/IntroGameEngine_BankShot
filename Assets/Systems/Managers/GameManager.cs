@@ -15,16 +15,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private BallManager ballManager;
     [SerializeField] private CameraManager cameraManager;
     [SerializeField] private GameStateManager gameStateManager;
-    [SerializeField] private InputManager inputManager;  
+    [SerializeField] private InputManager inputManager;
+    [SerializeField] private LevelManager levelManager;
     [SerializeField] private UIManager uiManager;
 
 
     // Public read-only accessors for other scripts to use the managers
-    public InputManager InputManager => inputManager;
+    public BallManager BallManager => ballManager;
     public CameraManager CameraManager => cameraManager;
     public GameStateManager GameStateManager => gameStateManager;
+    public InputManager InputManager => inputManager;
+    public LevelManager LevelManager => levelManager;
     public UIManager UIManager => uiManager;
-    public BallManager BallManager => ballManager;
+
+    
 
 
 
@@ -63,6 +67,7 @@ public class GameManager : MonoBehaviour
         cameraManager ??= GetComponentInChildren<CameraManager>();
         gameStateManager ??= GetComponentInChildren<GameStateManager>();
         inputManager ??= GetComponentInChildren<InputManager>();
+        levelManager ??= GetComponentInChildren<LevelManager>();
         uiManager ??= GetComponentInChildren<UIManager>();
 
 
