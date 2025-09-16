@@ -4,11 +4,13 @@ using UnityEngine;
 public class GameState_Aim : IGameState
 {
     GameManager gameManager => GameManager.Instance;
+    
+    BallManager ballManager => GameManager.Instance.BallManager;
+    CameraManager cameraManager => GameManager.Instance.CameraManager;
+    GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
     InputManager inputManager => GameManager.Instance.InputManager;
+    UIManager uIManager => GameManager.Instance.UIManager;
 
-    BallManager ballManager => gameManager.BallManager;
-    CameraManager cameraManager => gameManager.CameraManager;
-    //UIManager uIManager => gameManager.uIManager;
 
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.
@@ -28,9 +30,14 @@ public class GameState_Aim : IGameState
         cameraManager.EnableBallCamera();
         cameraManager.EnableCameraOrbit();
 
-        ballManager.aimGuide.SetActive(true); 
+        ballManager.aimGuide.SetActive(true);
+
+        uIManager.ShowGameplayUI();
+
 
         inputManager.ShootEvent += ballManager.ShootBall;
+        inputManager.PauseEvent += gameStateManager.Pause;
+
     }
 
    
@@ -59,6 +66,7 @@ public class GameState_Aim : IGameState
         ballManager.aimGuide.SetActive(false); // disable aim guide while ball is rolling
 
         inputManager.ShootEvent -= ballManager.ShootBall;
+        inputManager.PauseEvent -= gameStateManager.Pause;
     }
 
 }

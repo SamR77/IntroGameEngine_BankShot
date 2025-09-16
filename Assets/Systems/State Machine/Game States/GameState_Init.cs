@@ -6,8 +6,9 @@ public class GameState_Init : IGameState
     GameManager gameManager => GameManager.Instance;
     BallManager ballManager => GameManager.Instance.BallManager;
     CameraManager cameraManager => GameManager.Instance.CameraManager;
-    UIManager uIManager => GameManager.Instance.UIManager;
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
+    InputManager inputManager => GameManager.Instance.InputManager;
+    UIManager uIManager => GameManager.Instance.UIManager;
 
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.

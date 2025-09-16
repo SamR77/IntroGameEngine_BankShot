@@ -7,6 +7,7 @@ public class MainMenuUI_Controller : MonoBehaviour
 
     GameManager gameManager => GameManager.Instance;
     LevelManager levelManager => GameManager.Instance.LevelManager;
+    GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
 
     Button playButton;
     Button optionsButton;
@@ -42,8 +43,10 @@ public class MainMenuUI_Controller : MonoBehaviour
     #region Button Actions
 
     private void OnPlayButtonClicked()
-    { 
+    {
         Debug.Log("Play Button Clicked");
+        levelManager.ActivateLevel(1);
+        gameStateManager.SwitchToState(GameState_Aim.Instance);
     }
 
     private void OnOptionsButtonClicked()
@@ -54,6 +57,7 @@ public class MainMenuUI_Controller : MonoBehaviour
     private void OnQuitButtonClicked()
     {
         Debug.Log("Quit Button Clicked");
+        Application.Quit();        
     }
 
     #endregion

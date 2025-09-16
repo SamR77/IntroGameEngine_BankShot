@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // Sam Robichaud 
 // NSCC Truro 2025
@@ -10,16 +11,16 @@ public class GameStateManager : MonoBehaviour
     GameManager gameManager => GameManager.Instance;
     InputManager inputManager => GameManager.Instance.InputManager;
 
-    [Header("Debug (read only)")]
-    [SerializeField] private string lastActiveState;
+    [Header("Debug (read only)")]    
     [SerializeField] private string currentActiveState;
+    [SerializeField] private string lastActiveState;
 
     // Private variables to store state information
     private IGameState currentGameState;  // Current active state
     private IGameState lastGameState;     // Last active state (kept private for encapsulation)
 
     // Public getter for accessing the lastState externally (read-only access)
-    public IGameState LastState
+    public IGameState LastGameState
     {
         get { return lastGameState; }
     }
@@ -77,12 +78,21 @@ public class GameStateManager : MonoBehaviour
 
     public void Pause()
     {
-
+        SwitchToState(GameState_Paused.Instance);
     }
 
     public void Resume()
     {
-
+        if (currentGameState == GameState_Paused.Instance && LastGameState == GameState_Aim.Instance)
+        {
+            SwitchToState(GameState_Aim.Instance);
+            Debug.Log("Resuming gameplay in Aim state");
+        }
+        if (currentGameState == GameState_Paused.Instance && LastGameState == GameState_Rolling.Instance)
+        {
+            SwitchToState(GameState_Rolling.Instance);
+            Debug.Log("Resuming gameplay in Rolling state");
+        }
     }
 
     public void LoadLastState()

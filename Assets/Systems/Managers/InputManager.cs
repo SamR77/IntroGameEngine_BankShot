@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour, Inputs.IBallActions, Inputs.ICameraActions
+public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraActions
 {
     // Reference to the generated Input System class
     private Inputs inputs;
@@ -18,8 +18,8 @@ public class InputManager : MonoBehaviour, Inputs.IBallActions, Inputs.ICameraAc
         {
             inputs = new Inputs();
 
-            inputs.Ball.SetCallbacks(this); // Set the callbacks for the Ball action map
-            inputs.Ball.Enable(); // Enables the "Ball" action map
+            inputs.Game.SetCallbacks(this); // Set the callbacks for the Ball action map
+            inputs.Game.Enable(); // Enables the "Ball" action map
 
             inputs.Camera.SetCallbacks(this); // Set the callbacks for the Camera action map
             inputs.Camera.Enable(); // Enables the "Camera" action map
@@ -42,6 +42,7 @@ public class InputManager : MonoBehaviour, Inputs.IBallActions, Inputs.ICameraAc
     public event Action<InputAction.CallbackContext> ShootEvent;
 
     public event Action<InputAction.CallbackContext> JumpEvent;
+    public event Action PauseEvent;
 
     #endregion
 
@@ -59,9 +60,7 @@ public class InputManager : MonoBehaviour, Inputs.IBallActions, Inputs.ICameraAc
 
     // Camera Input Methods
     public void OnRotateCamera(InputAction.CallbackContext context)
-    {
-   
-
+    {  
 
             Vector2 lookInput = context.ReadValue<Vector2>();
             var device = context.control.device;
@@ -80,7 +79,10 @@ public class InputManager : MonoBehaviour, Inputs.IBallActions, Inputs.ICameraAc
         
     }
 
-
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        PauseEvent?.Invoke();
+    }
 
     public void OnMouseZoom(InputAction.CallbackContext context)
     {
@@ -114,7 +116,7 @@ public class InputManager : MonoBehaviour, Inputs.IBallActions, Inputs.ICameraAc
     {
         if (inputs != null)
         {
-            inputs.Ball.Enable();
+            inputs.Game.Enable();
             inputs.Camera.Enable();
         }
     }
@@ -122,7 +124,7 @@ public class InputManager : MonoBehaviour, Inputs.IBallActions, Inputs.ICameraAc
     {
         if (inputs != null)
         {
-            inputs.Ball.Disable();
+            inputs.Game.Disable();
             inputs.Camera.Disable();
         }
     }
