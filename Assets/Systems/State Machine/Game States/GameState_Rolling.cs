@@ -31,7 +31,9 @@ public class GameState_Rolling : IGameState
         ballManager.aimGuide.SetActive(false);
 
         // Start the coroutine to check if the ball has stopped after a delay
-        ballManager.StartCoroutine(ballManager.CheckBallStoppedAfterDelay());
+        ballManager.StartCheckBallStoppedAfterDelay();
+
+        //ballManager.StartCoroutine(ballManager.CheckBallStoppedAfterDelay());
     }
 
     public void FixedUpdateState()

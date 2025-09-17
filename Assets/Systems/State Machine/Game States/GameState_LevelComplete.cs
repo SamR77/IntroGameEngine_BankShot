@@ -31,10 +31,15 @@ public class GameState_LevelComplete : IGameState
         cameraManager.DisableCameraOrbit();        
 
         // hide all UI Menus
-        uIManager.ShowLevelCompleteUI();       
+        uIManager.ShowLevelCompleteUI();
+
+
+        // Check if coroutine CheckBallStoppedAfterDelay() in ball manager is still running and stop it 
+        // Stop the coroutine if it's running
+        ballManager.StopCheckBallStoppedAfterDelay();
     }
 
-  
+
     public void FixedUpdateState() {}
     public void UpdateState() {}
     public void LateUpdateState() {}

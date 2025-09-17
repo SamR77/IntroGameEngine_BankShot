@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameState_Aim : IGameState
@@ -64,7 +63,7 @@ public class GameState_Aim : IGameState
     public void ExitState()
     {
 
-        ballManager.aimGuide.SetActive(false); // disable aim guide while ball is rolling
+        //ballManager.aimGuide.SetActive(false); // disable aim guide while ball is rolling
 
         inputManager.ShootEvent -= ballManager.ShootBall;
         inputManager.PauseEvent -= gameStateManager.Pause;

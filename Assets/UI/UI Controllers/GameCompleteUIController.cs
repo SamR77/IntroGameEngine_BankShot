@@ -36,7 +36,7 @@ public class GameCompleteUIController : MonoBehaviour
     #region Button Actions
     private void OnMainMenuButtonClicked()
     {
-        levelManager.LoadMainMenuScene();
+        levelManager.LoadScene(0);
     }
     #endregion
 }

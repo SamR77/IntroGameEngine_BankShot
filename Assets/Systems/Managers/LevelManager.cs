@@ -40,14 +40,6 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(sceneId);
 
 
-        if (sceneId == 0) // Loading Main Menu
-        {
-            gameStateManager.SwitchToState(GameState_MainMenu.Instance);
-        }
-        else // Gameplay level
-        {
-            gameStateManager.SwitchToState(GameState_Aim.Instance);
-        }
     }
 
     public void LoadMainMenuScene()
@@ -59,7 +51,7 @@ public class LevelManager : MonoBehaviour
     public void ReloadCurrentScene()
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex);
-        gameStateManager.SwitchToState(GameState_Aim.Instance);
+       
 
         // this corrects an issue when scene is reloaded, input stops responding... re-initializes the Input Map?
         // InputManager.instance.SetActionMap_Gameplay();
@@ -76,9 +68,19 @@ public class LevelManager : MonoBehaviour
         int LevelCount = SceneManager.GetActiveScene().buildIndex;
         //Debug.Log("Scene Loaded: " + scene.name + " Build Index: " + scene.buildIndex);
 
-        if (scene.buildIndex > 0)
+        if (scene.buildIndex == 0)
+        { 
+            // main menu scene
+            gameStateManager.SwitchToState(GameState_MainMenu.Instance);
+
+        }
+
+
+        else if (scene.buildIndex > 0)
         {
-            // uIManager.UpdateShotsleft(levelInfo.ShotsToComplete);
+            
+
+            gameStateManager.SwitchToState(GameState_Aim.Instance);
 
             // Update the current level # on the UI
             uIManager.GameplayUIController.UpdateShotsRemainingLabel();
@@ -94,12 +96,7 @@ public class LevelManager : MonoBehaviour
             cameraManager.ResetCameraPosition();
         }
 
-        else if (scene.buildIndex == 0)
-        {
-            // Noting really needed here, buildIndex 0 = MainMenu scene,
-            // Which would be loaded with via 'LoadMainMenuScene' which also switches to the GameInitState which handles all the prep/resetting for the MainMenu.
-            // Leaving this here in case of debugging or future use.
-        }
+      
         // (Unsuscribe) Stop listening for sceneLoaded event
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }

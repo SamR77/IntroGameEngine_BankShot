@@ -52,7 +52,7 @@ public class MainMenuUIController : MonoBehaviour
     {
         Debug.Log("Play Button Clicked");
         levelManager.LoadScene(1);
-        gameStateManager.SwitchToState(GameState_Aim.Instance);
+        //gameStateManager.SwitchToState(GameState_Aim.Instance);
     }
 
     private void OnOptionsButtonClicked()

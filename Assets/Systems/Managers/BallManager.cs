@@ -33,7 +33,7 @@ public class BallManager : MonoBehaviour
     [SerializeField, Header("Debug Output (read only)")]
     private float ballVelocityMagnitude;
 
-    
+    private Coroutine checkBallStoppedCoroutine;
 
     private void Start()
     {
@@ -67,6 +67,21 @@ public class BallManager : MonoBehaviour
     // called during Rolling state to check if the ball has stopped moving after a short delay
     // if so it calls CheckForRemainingShots in GameManager to determine if the player failed or can continue
 
+
+    public void StartCheckBallStoppedAfterDelay()
+    {
+        checkBallStoppedCoroutine = StartCoroutine(CheckBallStoppedAfterDelay());
+    }
+
+    public void StopCheckBallStoppedAfterDelay()
+    {
+        if (checkBallStoppedCoroutine != null)
+        {
+            StopCoroutine(checkBallStoppedCoroutine);
+            checkBallStoppedCoroutine = null; // Important: set to null after stopping
+        }
+    }
+
     public IEnumerator CheckBallStoppedAfterDelay()
     {
         // Wait for the specified delay
@@ -79,6 +94,12 @@ public class BallManager : MonoBehaviour
             {
                 StopBall(); // Stop the ball
                 ballStopped = true;
+                
+                // TODO: add check to make sure were not in GameState_LevelComplete
+                // if yes... do nothing
+                // in no check for remaining shots.
+
+                // might also be able to address this by adding a slowdown effect on Goal Trigger Enter
 
                 gameManager.CheckForRemainingShots();
 

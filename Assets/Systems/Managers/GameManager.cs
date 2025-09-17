@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
         {
             // this means the goal has not been reached and there are still shots left
             // thought... would it make sense to have a bool for LevelComplete when the goal is reached that could be checked against here? It may not be needed as the logic already in place should interrupt this state before it gets here.
+            Debug.Log("Level not complete, Shots remaining switching to GameState_Aim");
             gameStateManager.SwitchToState(GameState_Aim.Instance);
         }
         else if(shotsRemaining <= 0)

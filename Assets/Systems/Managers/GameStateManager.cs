@@ -69,11 +69,13 @@ public class GameStateManager : MonoBehaviour
     // Method to switch between states
     public void SwitchToState(IGameState newState)
     {
-        lastGameState = currentGameState;   // Store the current state as the last state before switching
-        currentGameState?.ExitState();  // Exit the current state, run its ExitState method
+        Debug.Log($"Switching from {currentGameState?.GetType().Name} to {newState.GetType().Name}");
+        Debug.Log($"Stack trace: {System.Environment.StackTrace}");
 
-        currentGameState = newState;    // Switch to the new state        
-        currentGameState.EnterState();  // Enter the new state, and run its EnterState method
+        lastGameState = currentGameState;
+        currentGameState?.ExitState();
+        currentGameState = newState;
+        currentGameState.EnterState();
     }
 
     public void Pause()

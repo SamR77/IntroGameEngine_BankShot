@@ -19,11 +19,10 @@ public class GameState_MainMenu : IGameState
     #endregion
 
     public void EnterState()
-    {
+    {   
         Cursor.visible = true;
-
         Time.timeScale = 1f;
-       
+
         uIManager.ShowMainMenuUI();
 
         cameraManager.DisableCameraOrbit();
@@ -31,7 +30,11 @@ public class GameState_MainMenu : IGameState
 
         ballManager.ballMesh.SetActive(false);
         ballManager.aimGuide.SetActive(false);
-        ballManager.rb_ball.isKinematic = true; // make sure ball physics are disabled in main menu
+        ballManager.rb_ball.isKinematic = true;
+
+        // ADD THIS LINE - Stop any running ball check coroutines
+        ballManager.StopCheckBallStoppedAfterDelay();
+    
     }
   
     public void FixedUpdateState() {}
