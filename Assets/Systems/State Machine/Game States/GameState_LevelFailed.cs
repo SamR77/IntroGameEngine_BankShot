@@ -26,10 +26,8 @@ public class GameState_LevelFailed : IGameState
 
         cameraManager.DisableCameraOrbit();
         
-
         // hide all UI Menus
         uIManager.ShowLevelFailedUI();
-
        
     }
 

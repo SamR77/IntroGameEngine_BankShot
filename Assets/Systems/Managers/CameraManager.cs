@@ -23,8 +23,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] public float horizontalLookSensitivity = 30;
     [SerializeField] public float verticalLookSensitivity = 30;
 
-    [SerializeField] private float minVerticalAngle = 5f;
-    [SerializeField] private float maxVerticalAngle = 50f;
+    [SerializeField] private float minVerticalAngle = 15f;
+    [SerializeField] private float maxVerticalAngle = 60f;
     [SerializeField] private float rotationSpeed = 40f;
 
     [Header("Zoom Settings")]
@@ -126,8 +126,16 @@ public class CameraManager : MonoBehaviour
 
     public void SetBallCameraOrientation(Vector3 targetOrientation)
     {
-        // todo : implement method to set the camer to A SPECIFIC ORIENTATION
+        // Snap camera to target's position and orientation
+        ballCamera.ForceCameraPosition(target.position, Quaternion.LookRotation(targetOrientation));
+
+
+
     }
+
+
+
+
 
 
 

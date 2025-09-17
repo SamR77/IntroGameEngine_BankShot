@@ -20,19 +20,19 @@ public class GameState_MainMenu : IGameState
 
     public void EnterState()
     {
-
         Cursor.visible = true;
 
-
         Time.timeScale = 1f;
-        
-
-
-
-        // hide all UI Menus
+       
         uIManager.ShowMainMenuUI();
-    }
 
+        cameraManager.DisableCameraOrbit();
+        cameraManager.EnableMenuCamera();
+
+        ballManager.ballMesh.SetActive(false);
+        ballManager.aimGuide.SetActive(false);
+        ballManager.rb_ball.isKinematic = true; // make sure ball physics are disabled in main menu
+    }
   
     public void FixedUpdateState() {}
     public void UpdateState() {}

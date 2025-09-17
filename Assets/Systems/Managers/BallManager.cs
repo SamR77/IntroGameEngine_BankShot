@@ -1,10 +1,10 @@
-using System.Collections;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
 // Sam Robichaud 
 // NSCC Truro 2025
 // This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BallManager : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class BallManager : MonoBehaviour
     CameraManager cameraManager => GameManager.Instance.CameraManager;
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
     InputManager inputManager => GameManager.Instance.InputManager;        
-    UIManager UIManager => GameManager.Instance.UIManager;
+    UIManager uIManager => GameManager.Instance.UIManager;
     
 
 
@@ -54,8 +54,8 @@ public class BallManager : MonoBehaviour
     {
         if (context.started)
         {
-            gameManager.shotsLeft -= 1;
-            // UIManager.instance.UpdateShotsleft(gameManager.shotsLeft);
+            gameManager.shotsRemaining -= 1;            
+            uIManager.GameplayUIController.UpdateShotsRemainingLabel();            
 
             ballStopped = false; // the ball should be moving at this point
             rb_ball.AddForce(aimGuide.transform.forward * 25, ForceMode.VelocityChange);
@@ -63,6 +63,9 @@ public class BallManager : MonoBehaviour
             gameStateManager.SwitchToState(GameState_Rolling.Instance);
         }        
     }
+
+    // called during Rolling state to check if the ball has stopped moving after a short delay
+    // if so it calls CheckForRemainingShots in GameManager to determine if the player failed or can continue
 
     public IEnumerator CheckBallStoppedAfterDelay()
     {
@@ -91,7 +94,7 @@ public class BallManager : MonoBehaviour
         if (other.gameObject.tag == "GoalTrigger")
         {
             Debug.Log("Goal Reached");
-            gameStateManager.SwitchToState(GameState_LevelComplete.Instance);
+            gameManager.CheckForGameWin();
             return;
         }
 
@@ -132,9 +135,10 @@ public class BallManager : MonoBehaviour
         // the rotation hasn't changed yet. So I'm setting it in the
         // transform here as well.
 
-
         rb_ball.transform.position = startPosition.transform.position;
         rb_ball.transform.rotation = startPosition.transform.rotation;
+
+        cameraManager.SetBallCameraOrientation(startPosition.transform.forward);
     }
 
 

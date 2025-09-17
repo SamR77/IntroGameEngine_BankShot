@@ -1,9 +1,13 @@
+// Sam Robichaud 
+// NSCC Truro 2025
+// This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MainMenuUI_Controller : MonoBehaviour
+public class MainMenuUIController : MonoBehaviour
 {
-    UIDocument mainMenuUI => GetComponent<UIDocument>();
+    private UIDocument mainMenuUIDoc => GetComponent<UIDocument>();
 
     GameManager gameManager => GameManager.Instance;
 
@@ -20,11 +24,10 @@ public class MainMenuUI_Controller : MonoBehaviour
     #region Setup Button references and Listeners
     private void OnEnable()
     {
-
         // Button References
-        playButton = mainMenuUI.rootVisualElement.Q<Button>("PlayButton");
-        optionsButton = mainMenuUI.rootVisualElement.Q<Button>("OptionsButton");
-        quitButton = mainMenuUI.rootVisualElement.Q<Button>("QuitButton");
+        playButton = mainMenuUIDoc.rootVisualElement.Q<Button>("PlayButton");
+        optionsButton = mainMenuUIDoc.rootVisualElement.Q<Button>("OptionsButton");
+        quitButton = mainMenuUIDoc.rootVisualElement.Q<Button>("QuitButton");
 
         playButton.clicked += OnPlayButtonClicked;
         optionsButton.clicked += OnOptionsButtonClicked;
@@ -45,7 +48,6 @@ public class MainMenuUI_Controller : MonoBehaviour
     #endregion
 
     #region Button Actions
-
     private void OnPlayButtonClicked()
     {
         Debug.Log("Play Button Clicked");
@@ -63,7 +65,6 @@ public class MainMenuUI_Controller : MonoBehaviour
         Debug.Log("Quit Button Clicked");
         Application.Quit();        
     }
-
     #endregion
 }
 

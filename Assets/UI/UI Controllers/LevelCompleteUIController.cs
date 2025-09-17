@@ -5,11 +5,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LevelCompleteUI_Controller : MonoBehaviour
+public class LevelCompleteUIController : MonoBehaviour
 {
-
     UIDocument levelCompleteUI => GetComponent<UIDocument>();
-
 
     GameManager gameManager => GameManager.Instance;
        
@@ -18,7 +16,6 @@ public class LevelCompleteUI_Controller : MonoBehaviour
     UIManager uIManager => GameManager.Instance.UIManager;
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
     LevelManager levelManager => GameManager.Instance.LevelManager;
-
 
     Button nextLevelButton;
 

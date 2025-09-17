@@ -3,59 +3,89 @@ using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
+    #region UI Document references & public accessors
     [Header("UI Menu Objects")]
-    [SerializeField] private UIDocument mainMenu_UI;
-    [SerializeField] private UIDocument paused_UI;
-    [SerializeField] private UIDocument gameplay_UI;
-    [SerializeField] private UIDocument levelComplete_UI;
-    [SerializeField] private UIDocument levelFailed_UI;
-    [SerializeField] private UIDocument gameComplete_UI;
-    [SerializeField] private UIDocument credits_UI;
-    [SerializeField] private UIDocument options_UI;
+    [SerializeField] private UIDocument mainMenuUI;
+    [SerializeField] private UIDocument pausedUI;
+    [SerializeField] private UIDocument gameplayUI;
+    [SerializeField] private UIDocument levelCompleteUI;
+    [SerializeField] private UIDocument levelFailedUI;
+    [SerializeField] private UIDocument gameCompleteUI;
+    [SerializeField] private UIDocument creditsUI;
+    [SerializeField] private UIDocument optionsUI;
 
+    // Public accessors for external access
+    public UIDocument MainMenuUI => mainMenuUI;
+    public UIDocument PausedUI => pausedUI;
+    public UIDocument GameplayUI => gameplayUI;
+    public UIDocument LevelCompleteUI => levelCompleteUI;
+    public UIDocument LevelFailedUI => levelFailedUI;
+    public UIDocument GameCompleteUI => gameCompleteUI;
+    public UIDocument CreditsUI => creditsUI;
+    public UIDocument OptionsUI => optionsUI;
+    #endregion
+
+    #region UIController references & public accessors
     [Header("UI Controllers")]
-    // [SerializeField] private OverlayUI_Controller overlayUI_Controller;
-    // [SerializeField] private MainMenuUI_Controller mainMenuUI_Controller;
-    // [SerializeField] private GameplayUI_Controller gameplayUI_Controller;
-    // [SerializeField] private PauseMenuUI_Controller pauseMenuUI_Controller;
-    // [SerializeField] private LoadGameMenuUI_Controller loadGameMenuUI_Controller;
-    // [SerializeField] private SettingsMenuUI_Controller settingsMenuUI_Controller;
-    // [SerializeField] private CreditsMenuUI_Controller creditsMenuUI_Controller;
-    // [SerializeField] private CollectiblesMenuUI_Controller collectiblesMenuUI_Controller;
+    [SerializeField] private MainMenuUIController mainMenuUIController;
+    [SerializeField] private PausedUIController pausedUIController;
+    [SerializeField] private GameplayUIController gameplayUIController;
+    [SerializeField] private LevelCompleteUIController levelCompleteUIController;
+    [SerializeField] private LevelFailedUIController levelFailedUIController;
+    [SerializeField] private GameCompleteUIController gameCompleteUIController;
+    [SerializeField] private CreditsUIController creditsUIController;
+    [SerializeField] private OptionsUIController optionsUIController;
 
-    // Public read-only properties for external access
-    public UIDocument MainMenu_UI => mainMenu_UI;
-    public UIDocument Paused_UI => paused_UI;
-    public UIDocument Gameplay_UI => gameplay_UI;
-    public UIDocument LevelComplete_UI => levelComplete_UI;
-    public UIDocument LevelFailed_UI => levelFailed_UI;
-    public UIDocument GameComplete_UI => gameComplete_UI;
-    public UIDocument Credits_UI => credits_UI;
-    public UIDocument Options_UI => options_UI;
+    // Public accessors for external access
+    public MainMenuUIController MainMenuUIController => mainMenuUIController;
+    public PausedUIController PausedUIController => pausedUIController;
+    public GameplayUIController GameplayUIController => gameplayUIController;
+    public LevelCompleteUIController LevelCompleteUIController => levelCompleteUIController;
+    public LevelFailedUIController LevelFailedUIController => levelFailedUIController;
+    public GameCompleteUIController GameCompleteUIController => gameCompleteUIController;
+    public CreditsUIController CreditsUIController => creditsUIController;
+    public OptionsUIController OptionsUIController => optionsUIController;
+
+
+    #endregion
+
 
     private void Awake()
     {
         // TODO: consider having UIDoc register themselves with the UIManager on Awake
         // This would replace the FindObjectsOfType calls and make it more efficient/Modular
-
-        mainMenu_UI = FindUIDocument("MainMenu_UI");
-        paused_UI = FindUIDocument("Paused_UI");
-        gameplay_UI = FindUIDocument("Gameplay_UI");
-        levelComplete_UI = FindUIDocument("LevelComplete_UI");
-        levelFailed_UI = FindUIDocument("LevelFailed_UI");
-        gameComplete_UI = FindUIDocument("GameComplete_UI");
-        credits_UI = FindUIDocument("Credits_UI");
-        options_UI = FindUIDocument("Options_UI");
+                
+        mainMenuUI = FindUIDocument("MainMenuUI");
+        pausedUI = FindUIDocument("PausedUI");
+        gameplayUI = FindUIDocument("GameplayUI");
+        levelCompleteUI = FindUIDocument("LevelCompleteUI");
+        levelFailedUI = FindUIDocument("LevelFailedUI");
+        gameCompleteUI = FindUIDocument("GameCompleteUI");
+        creditsUI = FindUIDocument("CreditsUI");
+        optionsUI = FindUIDocument("OptionsUI");
 
         // Activate Parent GameObject of all UI Screens (Some are disbaled for visibity in the editor Game view)
-        if(mainMenu_UI != null) mainMenu_UI.gameObject.SetActive(true);
-        if(paused_UI != null) paused_UI.gameObject.SetActive(true);
-        if(gameplay_UI != null) gameplay_UI.gameObject.SetActive(true);
-        if(levelComplete_UI != null) levelComplete_UI.gameObject.SetActive(true);
-        if(levelFailed_UI != null) levelFailed_UI.gameObject.SetActive(true);
-        if(gameComplete_UI != null) gameComplete_UI.gameObject.SetActive(true);
-        if(credits_UI != null) credits_UI.gameObject.SetActive(true);
-        if(options_UI != null) options_UI.gameObject.SetActive(true);
+        if(mainMenuUI != null) mainMenuUI.gameObject.SetActive(true);
+        if(pausedUI != null) pausedUI.gameObject.SetActive(true);
+        if(gameplayUI != null) gameplayUI.gameObject.SetActive(true);
+        if(levelCompleteUI != null) levelCompleteUI.gameObject.SetActive(true);
+        if(levelFailedUI != null) levelFailedUI.gameObject.SetActive(true);
+        if(gameCompleteUI != null) gameCompleteUI.gameObject.SetActive(true);
+        if(creditsUI != null) creditsUI.gameObject.SetActive(true);
+        if(optionsUI != null) optionsUI.gameObject.SetActive(true);
+
+        // Set references to UI Controllers
+        mainMenuUIController = mainMenuUI?.GetComponent<MainMenuUIController>();
+        pausedUIController = pausedUI?.GetComponent<PausedUIController>();
+        gameplayUIController = gameplayUI?.GetComponent<GameplayUIController>();
+        levelCompleteUIController = levelCompleteUI?.GetComponent<LevelCompleteUIController>();
+        levelFailedUIController = levelFailedUI?.GetComponent<LevelFailedUIController>();
+        gameCompleteUIController = gameCompleteUI?.GetComponent<GameCompleteUIController>();
+        creditsUIController = creditsUI?.GetComponent<CreditsUIController>();
+        optionsUIController = optionsUI?.GetComponent<OptionsUIController>();
+
+        HideAllMenus(); // Start with all menus hidden
+
 
 
     }
@@ -66,73 +96,73 @@ public class UIManager : MonoBehaviour
     public void ShowMainMenuUI()
     {
         HideAllMenus();
-        mainMenu_UI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Gameplay UI
+        mainMenuUI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Gameplay UI
     }
 
     public void ShowPausedUI()
     {
         HideAllMenus();
-        paused_UI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Paused UI
+        pausedUI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Paused UI
     }
 
     public void ShowGameplayUI()
     {
         HideAllMenus();
-        gameplay_UI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Gameplay UI
+        gameplayUI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Gameplay UI
     }
 
     public void ShowLevelCompleteUI()
     {
         HideAllMenus();
-        levelComplete_UI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Level Complete UI
+        levelCompleteUI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Level Complete UI
     }
 
     public void ShowLevelFailedUI()
     {
         HideAllMenus();
-        levelFailed_UI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Level Failed UI
+        levelFailedUI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Level Failed UI
     }
 
     public void ShowGameCompleteUI()
     {
         HideAllMenus();
-        gameComplete_UI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Game Complete UI
+        gameCompleteUI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Game Complete UI
     }
 
     public void ShowCreditsUI()
     {
         HideAllMenus();
-        credits_UI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Credits UI
+        creditsUI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Credits UI
     }
 
     public void ShowOptionsUI()
         {
         HideAllMenus();
-        options_UI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Options UI
+        optionsUI.rootVisualElement.style.display = DisplayStyle.Flex; // Show Options UI
     }
 
     public void HideAllMenus()
     {
 
-       if (mainMenu_UI == null) Debug.LogError("mainMenu_UI is null, please check the UIManager setup.");
-       if (paused_UI == null) Debug.LogError("paused_UI is null, please check the UIManager setup.");
-       if (gameplay_UI == null) Debug.LogError("gameplay_UI is null, please check the UIManager setup.");
-       if (levelComplete_UI == null) Debug.LogError("levelComplete_UI is null, please check the UIManager setup.");
-       if (levelFailed_UI == null) Debug.LogError("levelFailed_UI is null, please check the UIManager setup.");
-       if (gameComplete_UI == null) Debug.LogError("gameComplete_UI is null, please check the UIManager setup.");
-       if (credits_UI == null) Debug.LogError("credits_UI is null, please check the UIManager setup.");
-       if (options_UI == null) Debug.LogError("options_UI is null, please check the UIManager setup.");
+       if (mainMenuUI == null) Debug.LogError("mainMenuUI is null, please check the UIManager setup.");
+       if (pausedUI == null) Debug.LogError("pausedUI is null, please check the UIManager setup.");
+       if (gameplayUI == null) Debug.LogError("gameplayUI is null, please check the UIManager setup.");
+       if (levelCompleteUI == null) Debug.LogError("levelCompleteUI is null, please check the UIManager setup.");
+       if (levelFailedUI == null) Debug.LogError("levelFailedUI is null, please check the UIManager setup.");
+       if (gameCompleteUI == null) Debug.LogError("gameCompleteUI is null, please check the UIManager setup.");
+       if (creditsUI == null) Debug.LogError("creditsUI is null, please check the UIManager setup.");
+       if (optionsUI == null) Debug.LogError("optionsUI is null, please check the UIManager setup.");
 
 
 
-        mainMenu_UI.rootVisualElement.style.display = DisplayStyle.None;
-        paused_UI.rootVisualElement.style.display = DisplayStyle.None;
-        gameplay_UI.rootVisualElement.style.display = DisplayStyle.None;
-        levelComplete_UI.rootVisualElement.style.display = DisplayStyle.None;
-        levelFailed_UI.rootVisualElement.style.display = DisplayStyle.None;
-        gameComplete_UI.rootVisualElement.style.display = DisplayStyle.None;
-        credits_UI.rootVisualElement.style.display = DisplayStyle.None;
-        options_UI.rootVisualElement.style.display = DisplayStyle.None;
+        mainMenuUI.rootVisualElement.style.display = DisplayStyle.None;
+        pausedUI.rootVisualElement.style.display = DisplayStyle.None;
+        gameplayUI.rootVisualElement.style.display = DisplayStyle.None;
+        levelCompleteUI.rootVisualElement.style.display = DisplayStyle.None;
+        levelFailedUI.rootVisualElement.style.display = DisplayStyle.None;
+        gameCompleteUI.rootVisualElement.style.display = DisplayStyle.None;
+        creditsUI.rootVisualElement.style.display = DisplayStyle.None;
+        optionsUI.rootVisualElement.style.display = DisplayStyle.None;
 
     }
 

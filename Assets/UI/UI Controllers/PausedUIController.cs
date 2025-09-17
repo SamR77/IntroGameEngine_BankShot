@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PausedUI_Controller : MonoBehaviour
+public class PausedUIController : MonoBehaviour
 {
     UIDocument mainMenuUI => GetComponent<UIDocument>();
 
@@ -71,7 +71,7 @@ public class PausedUI_Controller : MonoBehaviour
     private void OnMainMenuButtonClicked()
     {
         Debug.Log("MainMenu Button Clicked");
-        // Switch to MainMenu        
+        levelManager.LoadMainMenuScene();
     }
 
     #endregion

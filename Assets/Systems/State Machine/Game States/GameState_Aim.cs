@@ -29,14 +29,10 @@ public class GameState_Aim : IGameState
 
         cameraManager.EnableBallCamera();
         cameraManager.EnableCameraOrbit();
-
-        // Make sure Ball mesh Object is active
-        if (ballManager.ballMesh.activeSelf == false)
-        {
-            ballManager.ballMesh.SetActive(true);
-        }
-
+        
+        ballManager.ballMesh.SetActive(true);     
         ballManager.aimGuide.SetActive(true);
+        ballManager.rb_ball.isKinematic = false; // enable ball physics
 
         uIManager.ShowGameplayUI();
 

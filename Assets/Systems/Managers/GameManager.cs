@@ -1,5 +1,9 @@
-using UnityEngine;
+// Sam Robichaud 
+// NSCC Truro 2025
+// This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // GameManager must load first to initialize its references before sub-managers
 [DefaultExecutionOrder(-100)]
@@ -19,7 +23,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private UIManager uiManager;
 
-
     // Public read-only accessors for other scripts to use the managers
     public BallManager BallManager => ballManager;
     public CameraManager CameraManager => cameraManager;
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour
 
 
     [Header("Gameplay Info")]
-    public int shotsLeft = 3;
+    public int shotsRemaining = 99;
 
     [Header("Per Level Info")]
     public LevelInfo _levelInfo;
@@ -69,27 +72,22 @@ public class GameManager : MonoBehaviour
         inputManager ??= GetComponentInChildren<InputManager>();
         levelManager ??= GetComponentInChildren<LevelManager>();
         uiManager ??= GetComponentInChildren<UIManager>();
-
-
-
-
-
     }
 
     public void CheckForRemainingShots()
     {
-        if (shotsLeft > 0)
+        if (shotsRemaining > 0)
         {
             // this means the goal has not been reached and there are still shots left
             // thought... would it make sense to have a bool for LevelComplete when the goal is reached that could be checked against here? It may not be needed as the logic already in place should interrupt this state before it gets here.
             gameStateManager.SwitchToState(GameState_Aim.Instance);
         }
-        else if(shotsLeft <= 0)
+        else if(shotsRemaining <= 0)
         {
             //no shots left, Level failed... trigger the level failed state
 
             // TODO: Implement Level Failed State
-            //gameStateManager.SwitchToState(GameState_LevelFailed.Instance);
+            gameStateManager.SwitchToState(GameState_LevelFailed.Instance);
 
             Debug.Log("Level Failed - No Shots Remaining");
         }
@@ -97,7 +95,22 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+    public void CheckForGameWin()
+    {
+        // check to see if there are remaing levels after this one
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 1)
+        {
+            Debug.Log("Level Complete!");
+            gameStateManager.SwitchToState(GameState_LevelComplete.Instance);
+            return;
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            Debug.Log("Game Complete - All Levels Finished");
+            // All levels complete, trigger game complete state
+            gameStateManager.SwitchToState(GameState_GameComplete.Instance);
+        }        
+    }
 
 
 }

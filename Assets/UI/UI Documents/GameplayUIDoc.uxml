@@ -1,13 +1,14 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Style%20Sheets/Menu_SS.uss?fileID=7433441132597879392&amp;guid=a3200a47e8d50ea4cb7ea4fa184a14b1&amp;type=3#Menu_SS" />
     <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: stretch; justify-content: space-between;">
         <ui:VisualElement name="ShotsRemaining" style="flex-grow: 1; width: 25%; padding-left: 20px; padding-top: 10px;">
-            <ui:Label text="Shots Remaining: X" name="ShotsRemaining_label" style="font-size: 40px; -unity-font-style: bold-and-italic;" />
+            <ui:Label text="Shots Remaining: X" name="ShotsRemainingLabel" class="gameplayInfo" />
         </ui:VisualElement>
         <ui:VisualElement name="GameplayInfo" style="flex-grow: 1; align-items: center; width: 50%; padding-top: 20px;">
-            <ui:Label text="Aim with MOUSE&#10;&amp;&#10;Shoot with SPACE" name="GameplayInfo_label" style="font-size: 40px; -unity-font-style: bold-and-italic; text-overflow: clip; white-space: normal; width: 408px; -unity-text-align: upper-center;" />
+            <ui:Label text="Aim with MOUSE&#10;&amp;&#10;Shoot with SPACE" name="GameplayInfo_label" class="gameplayInfo" style="width: 408px; -unity-text-align: upper-center;" />
         </ui:VisualElement>
         <ui:VisualElement name="LevelCount" style="flex-grow: 1; width: 25%; padding-right: 20px; padding-top: 10px;">
-            <ui:Label text="Level: X" name="LevelCount_label" style="font-size: 40px; -unity-font-style: bold-and-italic; -unity-text-align: upper-right;" />
+            <ui:Label text="Level: X" name="LevelCountLabel" class="gameplayInfo" style="-unity-text-align: upper-right;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -30,6 +30,8 @@
     color: rgb(255, 255, 255);
     padding-top: 15px;
     padding-bottom: 15px;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgb(0, 0, 0);
 }
 
 .menu-button:hover {
@@ -43,4 +45,12 @@
     color: rgb(255, 255, 100);
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+.gameplayInfo {
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold-and-italic;
 }

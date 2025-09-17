@@ -5,9 +5,9 @@
         <ui:Label text="Paused" name="Title_label" class="title-label" style="width: 100%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 75px; padding-left: 0;" />
     </ui:VisualElement>
     <ui:VisualElement name="MenuButtons" style="flex-grow: 1; width: 400px; align-self: center; justify-content: space-around; padding-bottom: 100px; height: 30%;">
-        <ui:Button text="Resume" name="Resume_button" class="menu-button" style="padding-bottom: 50px;" />
-        <ui:Button text="Restart" name="Restart_button" class="menu-button" />
-        <ui:Button text="Options" name="Options_button" enabled="true" class="menu-button" />
-        <ui:Button text="Main Menu" name="MainMenu_button" class="menu-button" />
+        <ui:Button text="Resume" name="ResumeButton" class="menu-button" style="padding-bottom: 50px;" />
+        <ui:Button text="Restart" name="RestartButton" class="menu-button" />
+        <ui:Button text="Options" name="OptionsButton" enabled="false" class="menu-button" />
+        <ui:Button text="Main Menu" name="MainMenuButton" class="menu-button" />
     </ui:VisualElement>
 </ui:UXML>

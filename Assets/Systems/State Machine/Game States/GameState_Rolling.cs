@@ -27,10 +27,11 @@ public class GameState_Rolling : IGameState
         cameraManager.EnableBallCamera();
         cameraManager.EnableCameraOrbit();
 
+        ballManager.ballMesh.SetActive(true);
+        ballManager.aimGuide.SetActive(false);
 
         // Start the coroutine to check if the ball has stopped after a delay
         ballManager.StartCoroutine(ballManager.CheckBallStoppedAfterDelay());
-
     }
 
     public void FixedUpdateState()

@@ -26,17 +26,12 @@ public class GameState_LevelComplete : IGameState
 
     public void EnterState()
     {
-        Cursor.visible = true;
+        Cursor.visible = true;        
 
-        Time.timeScale = 0f;
-
-        cameraManager.DisableCameraOrbit();
-        
+        cameraManager.DisableCameraOrbit();        
 
         // hide all UI Menus
-        uIManager.ShowLevelCompleteUI();
-
-       
+        uIManager.ShowLevelCompleteUI();       
     }
 
   

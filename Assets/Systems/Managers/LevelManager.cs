@@ -3,19 +3,19 @@
 // This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 using System;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-
     GameManager gameManager => GameManager.Instance;
     BallManager ballManager => GameManager.Instance.BallManager;
     CameraManager cameraManager => GameManager.Instance.CameraManager;
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
     InputManager inputManager => GameManager.Instance.InputManager;
-    UIManager uIManager => GameManager.Instance.UIManager;
+    UIManager uIManager => GameManager.Instance.UIManager;    
 
     private int nextScene;
 
@@ -78,15 +78,13 @@ public class LevelManager : MonoBehaviour
 
         if (scene.buildIndex > 0)
         {
-            // Get a reference to the level info Script for that level
-            LevelInfo levelInfo = FindObjectOfType<LevelInfo>();
-
-            // Get the # shots(attempts) available for the level and update the UI
-            gameManager.shotsLeft = levelInfo.ShotsToComplete;
             // uIManager.UpdateShotsleft(levelInfo.ShotsToComplete);
 
             // Update the current level # on the UI
+            uIManager.GameplayUIController.UpdateShotsRemainingLabel();
+
             // uIManager.UpdateLevelCount(LevelCount);
+            uIManager.GameplayUIController.SetLevelLabel(nextScene);
 
             // Set the ball to the current level start position           
             ballManager.SetBallToStartPosition();
