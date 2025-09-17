@@ -72,18 +72,15 @@ public class LevelManager : MonoBehaviour
 
         }
 
-
         else if (scene.buildIndex > 0)
-        {
-            
-
+        {   
             gameStateManager.SwitchToState(GameState_Aim.Instance);
 
             // Update the current level # on the UI
             uIManager.GameplayUIController.UpdateShotsRemainingLabel();
 
             // uIManager.UpdateLevelCount(LevelCount);
-            uIManager.GameplayUIController.SetLevelLabel(nextScene);
+            uIManager.GameplayUIController.SetLevelLabel(SceneManager.GetActiveScene().buildIndex);
 
             // Set the ball to the current level start position           
             ballManager.SetBallToStartPosition();
