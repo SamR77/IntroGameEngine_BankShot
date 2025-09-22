@@ -82,31 +82,39 @@ public class BallManager : MonoBehaviour
 
     public IEnumerator CheckBallStoppedAfterDelay()
     {
-        // Wait for the specified delay
         yield return new WaitForSeconds(ballStopCheckDelay);
 
-        // Continuously check if the ball has stopped moving
+        float stillTime = 0f;
+        float requiredStillTime = 1.5f; // Time the ball must remain below threshold
+        float checkInterval = 0.1f;
+
         while (true)
         {
-            if (rb_ball.linearVelocity.magnitude < ballMagnitudeStopThreshold)
+            if (rb_ball.linearVelocity.magnitude < ballMagnitudeStopThreshold &&
+                rb_ball.angularVelocity.magnitude < ballMagnitudeStopThreshold)
             {
-                StopBall(); // Stop the ball
-                ballStopped = true;
-                
-                // TODO: add check to make sure were not in GameState_LevelComplete
-                // if yes... do nothing
-                // in no check for remaining shots.
+                stillTime += checkInterval;
 
-                // might also be able to address this by adding a slowdown effect on Goal Trigger Enter
+                if (stillTime >= requiredStillTime)
+                {
+                    StopBall();
+                    ballStopped = true;
 
-                gameManager.CheckForRemainingShots();
-
-                yield break; // Exit the coroutine as the check is complete
+                    // Add your GameState_LevelComplete check here
+                    gameManager.CheckForRemainingShots();
+                    yield break;
+                }
+            }
+            else
+            {
+                stillTime = 0f; // Reset if ball starts moving again
             }
 
-            yield return null; // Wait until the next frame and check again
+            yield return new WaitForSeconds(checkInterval);
         }
     }
+
+
 
     private void OnTriggerEnter(Collider other)
     {

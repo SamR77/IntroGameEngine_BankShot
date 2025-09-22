@@ -38906,9 +38906,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 3627135776115934827, guid: 98aa98ac6f7b74b4fbef08b1311f9745, type: 3}
-  StartingBalls: 120
+  StartingBalls: 150
   ballSpawnArea: {fileID: 1379235996}
-  BallSpawnDelay: 0.075
+  BallSpawnDelay: 0.08
 --- !u!1 &1503422764
 GameObject:
   m_ObjectHideFlags: 0
