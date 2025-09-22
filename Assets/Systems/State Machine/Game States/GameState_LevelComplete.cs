@@ -13,6 +13,7 @@ public class GameState_LevelComplete : IGameState
     UIManager uIManager => GameManager.Instance.UIManager;
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
     LevelManager levelManager => GameManager.Instance.LevelManager;
+    VFXManager vFXManager => GameManager.Instance.VFXManager;
 
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.
@@ -33,17 +34,18 @@ public class GameState_LevelComplete : IGameState
         // hide all UI Menus
         uIManager.ShowLevelCompleteUI();
 
-
         // Check if coroutine CheckBallStoppedAfterDelay() in ball manager is still running and stop it 
         // Stop the coroutine if it's running
         ballManager.StopCheckBallStoppedAfterDelay();
+
+        // Start the slow motion effect with a callback to clear the coroutine when complete
+        vFXManager.StartBallSlowDownEffect();
     }
 
 
     public void FixedUpdateState() {}
     public void UpdateState() {}
     public void LateUpdateState() {}
-
     public void ExitState() { }
 
 

@@ -12,7 +12,6 @@ public class BallManager : MonoBehaviour
     [Header("Manager References")]
 
     GameManager gameManager => GameManager.Instance;
-
     BallManager ballManager => GameManager.Instance.BallManager;
     CameraManager cameraManager => GameManager.Instance.CameraManager;
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
@@ -22,13 +21,14 @@ public class BallManager : MonoBehaviour
 
 
     [Header("References")]
-    public GameObject ballMesh;  // Ball Mesh?
+    public GameObject ballMesh;  
     public Rigidbody rb_ball;
     public GameObject aimGuide;
 
     public bool ballStopped;
     public float ballMagnitudeStopThreshold = 0.1f; // Adjust this value as needed
     public float ballStopCheckDelay = 0.5f; // Adjust this value as needed
+    public float shootForce = 25f;
 
     [SerializeField, Header("Debug Output (read only)")]
     private float ballVelocityMagnitude;
@@ -42,7 +42,6 @@ public class BallManager : MonoBehaviour
         //cameraManager.freeLookCamera.Follow = ball.transform;
         //cameraManager.instance.freeLookCamera.LookAt = ball.transform;
     }
-
 
     void Update()
     {
@@ -58,7 +57,7 @@ public class BallManager : MonoBehaviour
             uIManager.GameplayUIController.UpdateShotsRemainingLabel();            
 
             ballStopped = false; // the ball should be moving at this point
-            rb_ball.AddForce(aimGuide.transform.forward * 25, ForceMode.VelocityChange);
+            rb_ball.AddForce(aimGuide.transform.forward * shootForce, ForceMode.VelocityChange);
 
             gameStateManager.SwitchToState(GameState_Rolling.Instance);
         }        
@@ -66,7 +65,6 @@ public class BallManager : MonoBehaviour
 
     // called during Rolling state to check if the ball has stopped moving after a short delay
     // if so it calls CheckForRemainingShots in GameManager to determine if the player failed or can continue
-
 
     public void StartCheckBallStoppedAfterDelay()
     {
@@ -142,7 +140,7 @@ public class BallManager : MonoBehaviour
     {
         //  Find Start Position object in current scene
 
-        Transform startPosition = GameObject.FindWithTag("BallSpawnPoint").transform;
+        Transform startPosition = GameObject.FindWithTag("BallSpawnPoint").transform;       
 
         StopBall(); // Stop the ball   
         rb_ball.position = startPosition.transform.position;
@@ -159,11 +157,10 @@ public class BallManager : MonoBehaviour
         rb_ball.transform.position = startPosition.transform.position;
         rb_ball.transform.rotation = startPosition.transform.rotation;
 
+        rb_ball.GetComponent<TrailRenderer>().Clear();
+
         cameraManager.SetBallCameraOrientation(startPosition.transform.forward);
     }
-
-
-
 
     public void StopBall() //immediately halts the ball movement
     {

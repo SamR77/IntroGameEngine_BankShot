@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameStateManager gameStateManager;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private LevelManager levelManager;
-    [SerializeField] private UIManager uiManager;
+    [SerializeField] private UIManager uIManager;
+    [SerializeField] private VFXManager vFXManager;
 
     // Public read-only accessors for other scripts to use the managers
     public BallManager BallManager => ballManager;
@@ -29,9 +30,10 @@ public class GameManager : MonoBehaviour
     public GameStateManager GameStateManager => gameStateManager;
     public InputManager InputManager => inputManager;
     public LevelManager LevelManager => levelManager;
-    public UIManager UIManager => uiManager;
+    public UIManager UIManager => uIManager;
+    public VFXManager VFXManager => vFXManager;
 
-    
+
 
 
 
@@ -71,9 +73,9 @@ public class GameManager : MonoBehaviour
         gameStateManager ??= GetComponentInChildren<GameStateManager>();
         inputManager ??= GetComponentInChildren<InputManager>();
         levelManager ??= GetComponentInChildren<LevelManager>();
-        uiManager ??= GetComponentInChildren<UIManager>();
+        uIManager ??= GetComponentInChildren<UIManager>();
+        vFXManager ??= GetComponentInChildren<VFXManager>();    
     }
-
     public void CheckForRemainingShots()
     {
         if (shotsRemaining > 0)
@@ -95,7 +97,6 @@ public class GameManager : MonoBehaviour
 
 
     }
-
     public void CheckForGameWin()
     {
         // check to see if there are remaing levels after this one
