@@ -3,11 +3,12 @@ using UnityEngine;
 public class GameState_Rolling : IGameState
 {
     GameManager gameManager => GameManager.Instance;
-    InputManager inputManager => GameManager.Instance.InputManager;
 
-    BallManager ballManager => gameManager.BallManager;
-    CameraManager cameraManager => gameManager.CameraManager;
-    //UIManager uIManager => gameManager.uIManager;
+    BallManager ballManager => GameManager.Instance.BallManager;
+    CameraManager cameraManager => GameManager.Instance.CameraManager;
+    GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
+    InputManager inputManager => GameManager.Instance.InputManager;
+    UIManager uIManager => GameManager.Instance.UIManager;
 
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.
@@ -29,11 +30,11 @@ public class GameState_Rolling : IGameState
 
         ballManager.ballMesh.SetActive(true);
         ballManager.aimGuide.SetActive(false);
+        ballManager.rb_ball.isKinematic = false; // enable ball physics
 
-        // Start the coroutine to check if the ball has stopped after a delay
-        ballManager.StartCheckBallStoppedAfterDelay();
+        uIManager.ShowGameplayUI();
 
-        //ballManager.StartCoroutine(ballManager.CheckBallStoppedAfterDelay());
+        inputManager.PauseEvent += gameStateManager.Pause;
     }
 
     public void FixedUpdateState()
@@ -54,7 +55,7 @@ public class GameState_Rolling : IGameState
 
     public void ExitState()
     {
-        
+        inputManager.PauseEvent -= gameStateManager.Pause;
     }
 
 }
