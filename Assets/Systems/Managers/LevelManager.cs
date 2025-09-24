@@ -16,6 +16,13 @@ public class LevelManager : MonoBehaviour
 
     private int nextScene;
 
+    // Scenes Id's
+    // 0 = Bootstrap Scene
+    // 1 = Main Menu
+    // 2+ = Gameplay Levels
+
+
+
     public void LoadNextLevel()
     {
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
@@ -39,10 +46,10 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    public void LoadMainMenuScene()
+    public void LoadMainMenu()
     {
-        LoadScene(0);
-        gameStateManager.SwitchToState(GameState_Init.Instance);
+        LoadScene(1);
+        gameStateManager.SwitchToState(GameState_MainMenu.Instance);
     }
 
     public void ReloadCurrentScene()
@@ -65,14 +72,14 @@ public class LevelManager : MonoBehaviour
         int LevelCount = SceneManager.GetActiveScene().buildIndex;
         //Debug.Log("Scene Loaded: " + scene.name + " Build Index: " + scene.buildIndex);
 
-        if (scene.buildIndex == 0)
+        if (scene.buildIndex == 1)
         { 
             // main menu scene
             gameStateManager.SwitchToState(GameState_MainMenu.Instance);
 
         }
 
-        else if (scene.buildIndex > 0)
+        else if (scene.buildIndex > 1)
         {   
             gameStateManager.SwitchToState(GameState_Aim.Instance);
 

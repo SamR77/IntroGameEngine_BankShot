@@ -1,6 +1,6 @@
 using UnityEngine;
-
-public class GameState_Init : IGameState
+using UnityEngine.SceneManagement;
+public class GameState_Bootstrapped : IGameState
 {
     GameManager gameManager => GameManager.Instance;
     BallManager ballManager => GameManager.Instance.BallManager;
@@ -12,11 +12,11 @@ public class GameState_Init : IGameState
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.
     // The 'readonly' keyword ensures this instance cannot be modified after initialization.
-    private static readonly GameState_Init _instance = new GameState_Init();
+    private static readonly GameState_Bootstrapped _instance = new GameState_Bootstrapped();
 
     // Provides global access to the singleton instance of this state.
     // Uses an expression-bodied property to return the static _instance variable.
-    public static GameState_Init Instance => _instance;
+    public static GameState_Bootstrapped Instance => _instance;
     #endregion
 
     public void EnterState()
@@ -30,8 +30,24 @@ public class GameState_Init : IGameState
         // disable all Cinemachine cameras
         cameraManager.DisableAllCameras();
 
+        // Detect Current Scene Type and set GameState accordingly
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            Debug.Log("Bootstrap detected Main Menu Level, Switching to GameState_MainMenu");
+            gameManager.GameStateManager.SwitchToState(GameState_MainMenu.Instance);
+        }
+        else
+        {
+            Debug.Log("Bootstrap detected gameplay level Level, Switching to GameState_Aim");
+            gameManager.GameStateManager.SwitchToState(GameState_Aim.Instance);
+        }
+
+
+        //uIManager.DetectAndSetUIForCurrentScene();
+
+
         // Switch over to default starting state
-        gameStateManager.SwitchToState(GameState_MainMenu.Instance);
+        // gameStateManager.SwitchToState(GameState_MainMenu.Instance);
     }
 
   

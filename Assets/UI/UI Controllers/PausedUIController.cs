@@ -71,7 +71,7 @@ public class PausedUIController : MonoBehaviour
     private void OnMainMenuButtonClicked()
     {
         Debug.Log("MainMenu Button Clicked");
-        levelManager.LoadMainMenuScene();
+        levelManager.LoadMainMenu();
     }
 
     #endregion
