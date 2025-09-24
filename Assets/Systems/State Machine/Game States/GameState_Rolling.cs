@@ -35,6 +35,8 @@ public class GameState_Rolling : IGameState
         uIManager.ShowGameplayUI();
 
         inputManager.PauseEvent += gameStateManager.Pause;
+
+        ballManager.StartCheckBallStoppedAfterDelay();
     }
 
     public void FixedUpdateState()
