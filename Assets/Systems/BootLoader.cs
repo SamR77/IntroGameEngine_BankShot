@@ -52,27 +52,12 @@ public class BootLoader : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        Debug.Log("Bootstrap Initialized.");
+        Debug.Log("BootLoader Initialized.");
 
 
         #endregion
     }
 
-    private void Start()
-    {
-        // If BootLoader is the only active scene, redirect to MainMenu
-        if (SceneManager.sceneCount == 1 && SceneManager.GetActiveScene().name == "BootLoader")
-        {
-            Debug.Log("BootLoader is the only active scene. Redirecting to MainMenu...");
-            GameManager.Instance.LevelManager.LoadMainMenu();
-        }
-        else
-        {
-            Debug.Log("BootLoader loaded alongside other scenes. No redirection.");
-        }
-
-
-    }
 
     public void Test()
     {

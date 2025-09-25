@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3805011507813333508}
   - component: {fileID: -4704539160690536490}
   m_Layer: 0
-  m_Name: TempBall
+  m_Name: MainMenuBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3627135776115934827}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a061c0d846df7ef46bdeb7b09d770217, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

@@ -38,18 +38,42 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
+    // this is the main Method that handles scene loading
+    // all scene changes should go through this method
+
+    private void LoadScene(int sceneId)
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(sceneId);
+    }
+
+
+
+
+    /*  old method
     public void LoadScene(int sceneId)
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(sceneId);
-
-
     }
+    */
+
+    #region Scene Loaders
+
+    // publicly accessible methods to handle scene loading
 
     public void LoadMainMenu()
     {
         LoadScene(1);
+        Debug.Log("Loading Main Menu...");
         gameStateManager.SwitchToState(GameState_MainMenu.Instance);
+    }
+
+    public void LoadFirstLevel()
+    {
+        LoadScene(2);
+        //gameStateManager.SwitchToState(GameState_Aim.Instance);
     }
 
     public void ReloadCurrentScene()
@@ -61,6 +85,11 @@ public class LevelManager : MonoBehaviour
         // InputManager.instance.SetActionMap_Gameplay();
     }
 
+    #endregion
+
+
+
+    // TODO: Move to GameStateManager?
     public void QuitGame()
     {
         Application.Quit();

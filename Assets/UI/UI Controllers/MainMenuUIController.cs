@@ -51,7 +51,9 @@ public class MainMenuUIController : MonoBehaviour
     private void OnPlayButtonClicked()
     {
         Debug.Log("Play Button Clicked");
-        levelManager.LoadScene(2);
+        levelManager.LoadFirstLevel();
+
+        //levelManager.LoadScene(2);
         //gameStateManager.SwitchToState(GameState_Aim.Instance);
     }
 
