@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// Loads Bootstrap scene if it's not already loaded
+// Loads BootLoader scene if it's not already loaded
 
 [DefaultExecutionOrder(-100)]
-public static class PerformBootstrap
+public static class PerformBootLoad
 {
-    const string sceneName = "Bootstrap";
+    const string sceneName = "BootLoader";
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void Execute()
@@ -18,14 +18,14 @@ public static class PerformBootstrap
             {
                 var candidateScene = SceneManager.GetSceneAt(sceneIndex);
 
-                // if bootstrap scene is already loaded, do nothing
+                // if BootLoader scene is already loaded, do nothing
                 if (candidateScene.name == sceneName)
                 {
                     return;
                 }
             }
 
-            Debug.Log("Loading Bootstrap scene" + sceneName);
+            Debug.Log("Loading BootLoader scene" + sceneName);
 
             // if we get here, the bootstrap scene is not loaded, so load it (additively)
             SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
@@ -33,9 +33,9 @@ public static class PerformBootstrap
     }
 }
 
-public class BootstrappedData : MonoBehaviour
+public class BootLoader : MonoBehaviour
 {
-    public static BootstrappedData Instance { get; private set; } = null;
+    public static BootLoader Instance { get; private set; } = null;
 
     private void Awake()
     {
@@ -54,14 +54,29 @@ public class BootstrappedData : MonoBehaviour
 
         Debug.Log("Bootstrap Initialized.");
 
+
+        #endregion
     }
-    #endregion
+
+    private void Start()
+    {
+        // If BootLoader is the only active scene, redirect to MainMenu
+        if (SceneManager.sceneCount == 1 && SceneManager.GetActiveScene().name == "BootLoader")
+        {
+            Debug.Log("BootLoader is the only active scene. Redirecting to MainMenu...");
+            GameManager.Instance.LevelManager.LoadMainMenu();
+        }
+        else
+        {
+            Debug.Log("BootLoader loaded alongside other scenes. No redirection.");
+        }
 
 
+    }
 
     public void Test()
     {
-        Debug.Log("BootstrapData is working");
+        Debug.Log("BootLoader Scene is active");
     }
 
 }
