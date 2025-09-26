@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class GameState_Bootstrapped : IGameState
+public class GameState_BootLoad : IGameState
 {
     GameManager gameManager => GameManager.Instance;
     BallManager ballManager => GameManager.Instance.BallManager;
@@ -12,11 +12,11 @@ public class GameState_Bootstrapped : IGameState
     #region Singleton Instance
     // A single, readonly instance of the atate class is created.
     // The 'readonly' keyword ensures this instance cannot be modified after initialization.
-    private static readonly GameState_Bootstrapped _instance = new GameState_Bootstrapped();
+    private static readonly GameState_BootLoad _instance = new GameState_BootLoad();
 
     // Provides global access to the singleton instance of this state.
     // Uses an expression-bodied property to return the static _instance variable.
-    public static GameState_Bootstrapped Instance => _instance;
+    public static GameState_BootLoad Instance => _instance;
     #endregion
 
     public void EnterState()
@@ -51,6 +51,8 @@ public class GameState_Bootstrapped : IGameState
         // if all the above fails the assumption is that we are in a Gameplay Scene
         else if (SceneManager.sceneCount > 1)
         {  
+            ballManager.SetBallToStartPosition();
+
             Debug.Log("BootLostrap initialized in Gameplay Scenede, Switching to GameState_Aim");
             gameManager.GameStateManager.SwitchToState(GameState_Aim.Instance);
         }

@@ -25,7 +25,7 @@ public class GameStateManager : MonoBehaviour
     }
 
     // Instantiate game state objects
-    public GameState_Bootstrapped gameState_Bootstrapped = GameState_Bootstrapped.Instance;
+    public GameState_BootLoad gameState_Bootstrapped = GameState_BootLoad.Instance;
 
     // Menu States
     public GameState_MainMenu gameState_MainMenu = GameState_MainMenu.Instance;
@@ -80,7 +80,7 @@ public class GameStateManager : MonoBehaviour
     public void SwitchToState(IGameState newState)
     {
         Debug.Log($"Switching from {currentGameState?.GetType().Name} to {newState.GetType().Name}");
-        Debug.Log($"Stack trace: {System.Environment.StackTrace}");
+        // Debug.Log($"Stack trace: {System.Environment.StackTrace}");
 
         lastGameState = currentGameState;
         currentGameState?.ExitState();

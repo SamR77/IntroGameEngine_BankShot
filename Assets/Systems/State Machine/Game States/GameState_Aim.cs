@@ -23,15 +23,16 @@ public class GameState_Aim : IGameState
 
     public void EnterState()
     {
+        ballManager.StopBall();
+
         Cursor.visible = false;
         Time.timeScale = 1f;
 
         cameraManager.EnableBallCamera();
         cameraManager.EnableCameraOrbit();
-        
-        ballManager.ballMesh.SetActive(true);     
+
+        ballManager.ballMesh.SetActive(true);
         ballManager.aimGuide.SetActive(true);
-        ballManager.rb_ball.isKinematic = false; // enable ball physics
 
         uIManager.ShowGameplayUI();
 
@@ -48,10 +49,8 @@ public class GameState_Aim : IGameState
     }
 
     public void UpdateState()
-    {
-        
+    {        
         ballManager.HandleAimGuide();
-
     }
 
     public void LateUpdateState()

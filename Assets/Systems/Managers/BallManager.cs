@@ -53,6 +53,8 @@ public class BallManager : MonoBehaviour
     {
         if (context.started)
         {
+            rb_ball.isKinematic = false; // enable ball physics
+
             gameManager.shotsRemaining -= 1;            
             uIManager.GameplayUIController.UpdateShotsRemainingLabel();            
 
@@ -66,12 +68,12 @@ public class BallManager : MonoBehaviour
     // called during Rolling state to check if the ball has stopped moving after a short delay
     // if so it calls CheckForRemainingShots in GameManager to determine if the player failed or can continue
 
-    public void StartCheckBallStoppedAfterDelay()
+    public void StartCoroutineCheckBallStop()
     {
-        checkBallStoppedCoroutine = StartCoroutine(CheckBallStoppedAfterDelay());
+        checkBallStoppedCoroutine = StartCoroutine(CheckBallStop());
     }
 
-    public void StopCheckBallStoppedAfterDelay()
+    public void StopCoroutineCheckBallStop()
     {
         if (checkBallStoppedCoroutine != null)
         {
@@ -80,7 +82,7 @@ public class BallManager : MonoBehaviour
         }
     }
 
-    public IEnumerator CheckBallStoppedAfterDelay()
+    public IEnumerator CheckBallStop()
     {
         yield return new WaitForSeconds(ballStopCheckDelay);
 
@@ -146,15 +148,24 @@ public class BallManager : MonoBehaviour
 
     public void SetBallToStartPosition()
     {
+        StopCoroutineCheckBallStop();
+
+
         //  Find Start Position object in current scene
+        GameObject spawnObj = GameObject.FindWithTag("BallSpawnPoint");
+        if (spawnObj == null)
+        {
+            Debug.LogError("BallSpawnPoint not found! Make sure it exists and is active in the scene.");
+            return;
+        }
+        Transform startPosition = spawnObj.transform;
 
-        Transform startPosition = GameObject.FindWithTag("BallSpawnPoint").transform;       
-
-        StopBall(); // Stop the ball   
+         
         rb_ball.position = startPosition.transform.position;
         rb_ball.rotation = startPosition.transform.rotation;
 
 
+        
         // ** Bugfix by Daniel Nascimento **
         // When setting position and rotation in the rigidbody
         // it'll take effect during the physics update. So I believe
@@ -165,17 +176,24 @@ public class BallManager : MonoBehaviour
         rb_ball.transform.position = startPosition.transform.position;
         rb_ball.transform.rotation = startPosition.transform.rotation;
 
+        StopBall(); // Stop the ball  
+
         rb_ball.GetComponent<TrailRenderer>().Clear();
 
         cameraManager.SetBallCameraOrientation(startPosition.transform.forward);
     }
 
-    public void StopBall() //immediately halts the ball movement
+    public void StopBall()
     {
-        rb_ball.isKinematic = true;
+
+
+        // Make kinematic to stop all physics
         rb_ball.isKinematic = false;
-        // Also setting velocities to zero just in case.
         rb_ball.linearVelocity = Vector3.zero;
         rb_ball.angularVelocity = Vector3.zero;
+        rb_ball.isKinematic = true;
+
+
     }
+
 }
