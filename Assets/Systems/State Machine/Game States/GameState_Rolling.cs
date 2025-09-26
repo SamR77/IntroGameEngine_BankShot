@@ -36,7 +36,7 @@ public class GameState_Rolling : IGameState
 
         inputManager.PauseEvent += gameStateManager.Pause;
 
-        ballManager.StartCheckBallStoppedAfterDelay();
+        ballManager.StartCoroutineCheckBallStop();
     }
 
     public void FixedUpdateState()
@@ -58,6 +58,9 @@ public class GameState_Rolling : IGameState
     public void ExitState()
     {
         inputManager.PauseEvent -= gameStateManager.Pause;
+
+        // ADD THIS LINE - Stop any running ball check coroutines
+        ballManager.StopCoroutineCheckBallStop();
     }
 
 }

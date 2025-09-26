@@ -18,8 +18,6 @@ public class VFXManager : MonoBehaviour
     UIManager uIManager => GameManager.Instance.UIManager;
     VFXManager vFXManager => GameManager.Instance.VFXManager;
 
-
-    [Header("References")]
     public ParticleSystem LevelCompleteEffect;
 
     private Coroutine slowMoCoroutine;
@@ -27,9 +25,20 @@ public class VFXManager : MonoBehaviour
     private float velocityScale; 
     private float transitionTime = 3.0f; // Time to transition to TARGET Time
 
-    public void StartBallSlowDownEffect()
+    public void StartCoroutineBallSlowDownEffect()
     {
-        StartCoroutine(SlowMoVelocity(ballManager.rb_ball, velocityScale, transitionTime));
+        slowMoCoroutine = StartCoroutine(SlowMoVelocity(ballManager.rb_ball, velocityScale, transitionTime));       
+    }
+
+    public void StopCoroutineBallSlowDownEffect()
+    {
+        if (slowMoCoroutine != null)
+        {
+            StopCoroutine(slowMoCoroutine);
+            slowMoCoroutine = null;
+
+            Debug.Log("Stopped SlowMo Coroutine");
+        }
     }
 
 

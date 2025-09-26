@@ -50,7 +50,7 @@ public class LevelFailedUIController : MonoBehaviour
 
     private void OnMainMenuButtonClicked()
     {
-        levelManager.LoadMainMenuScene();
+        levelManager.LoadMainMenu();
     }
     #endregion
 

@@ -25,7 +25,18 @@ public class GameStateManager : MonoBehaviour
     }
 
     // Instantiate game state objects
-    public GameState_Init gameState_Init = GameState_Init.Instance;
+    public GameState_BootLoad gameState_Bootstrapped = GameState_BootLoad.Instance;
+
+    // Menu States
+    public GameState_MainMenu gameState_MainMenu = GameState_MainMenu.Instance;
+    public GameState_Paused gameState_Paused = GameState_Paused.Instance;
+    public GameState_LevelComplete gameState_LevelComplete = GameState_LevelComplete.Instance;
+    public GameState_LevelFailed gameState_LevelFailed = GameState_LevelFailed.Instance;
+    public GameState_Credits gameState_Credits = GameState_Credits.Instance;
+    public GameState_GameComplete gameState_GameComplete = GameState_GameComplete.Instance;
+    public GameState_Options gameState_OptionsMenu = GameState_Options.Instance;
+
+    // Gameplay States
     public GameState_Aim gameState_Aim = GameState_Aim.Instance;
     public GameState_Rolling gameState_Rolling = GameState_Rolling.Instance;
 
@@ -33,7 +44,7 @@ public class GameStateManager : MonoBehaviour
     private void Start()
     {
         // Initialize the state manager with the initial state
-        currentGameState = gameState_Init;
+        currentGameState = gameState_Bootstrapped;
         currentGameState.EnterState();
     }
 
@@ -69,7 +80,7 @@ public class GameStateManager : MonoBehaviour
     public void SwitchToState(IGameState newState)
     {
         Debug.Log($"Switching from {currentGameState?.GetType().Name} to {newState.GetType().Name}");
-        Debug.Log($"Stack trace: {System.Environment.StackTrace}");
+        // Debug.Log($"Stack trace: {System.Environment.StackTrace}");
 
         lastGameState = currentGameState;
         currentGameState?.ExitState();

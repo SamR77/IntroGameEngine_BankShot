@@ -3,6 +3,7 @@
 // This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 using UnityEngine;
+using static System.TimeZoneInfo;
 
 public class GameState_LevelComplete : IGameState
 {
@@ -36,17 +37,22 @@ public class GameState_LevelComplete : IGameState
 
         // Check if coroutine CheckBallStoppedAfterDelay() in ball manager is still running and stop it 
         // Stop the coroutine if it's running
-        ballManager.StopCheckBallStoppedAfterDelay();
+        ballManager.StopCoroutineCheckBallStop();
 
         // Start the slow motion effect with a callback to clear the coroutine when complete
-        vFXManager.StartBallSlowDownEffect();
+        vFXManager.StartCoroutineBallSlowDownEffect();
     }
 
 
     public void FixedUpdateState() {}
     public void UpdateState() {}
     public void LateUpdateState() {}
-    public void ExitState() { }
+    public void ExitState() 
+    {
+    vFXManager.StopCoroutineBallSlowDownEffect();
+    }
 
+
+   
 
 }

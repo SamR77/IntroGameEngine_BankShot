@@ -32,8 +32,6 @@ public class GameState_MainMenu : IGameState
         ballManager.aimGuide.SetActive(false);
         ballManager.rb_ball.isKinematic = true;
 
-        // ADD THIS LINE - Stop any running ball check coroutines
-        ballManager.StopCheckBallStoppedAfterDelay();
     
     }
   
@@ -41,7 +39,10 @@ public class GameState_MainMenu : IGameState
     public void UpdateState() {}
     public void LateUpdateState() {}
 
-    public void ExitState() { }
+    public void ExitState()
+    {        
+
+    }
 
 
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 // GameManager must load first to initialize its references before sub-managers
-[DefaultExecutionOrder(-100)]
+[DefaultExecutionOrder(-50)]
 
 public class GameManager : MonoBehaviour
 {

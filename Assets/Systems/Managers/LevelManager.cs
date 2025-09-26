@@ -16,6 +16,13 @@ public class LevelManager : MonoBehaviour
 
     private int nextScene;
 
+    // Scenes Id's
+    // 0 = Bootstrap Scene
+    // 1 = Main Menu
+    // 2+ = Gameplay Levels
+
+
+
     public void LoadNextLevel()
     {
         nextScene = SceneManager.GetActiveScene().buildIndex + 1;
@@ -31,18 +38,42 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
+    // this is the main Method that handles scene loading
+    // all scene changes should go through this method
+
+    private void LoadScene(int sceneId)
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene(sceneId);
+    }
+
+
+
+
+    /*  old method
     public void LoadScene(int sceneId)
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.LoadScene(sceneId);
+    }
+    */
 
+    #region Scene Loaders
 
+    // publicly accessible methods to handle scene loading
+
+    public void LoadMainMenu()
+    {
+        LoadScene(1);
+        Debug.Log("Loading Main Menu...");
+        gameStateManager.SwitchToState(GameState_MainMenu.Instance);
     }
 
-    public void LoadMainMenuScene()
+    public void LoadFirstLevel()
     {
-        LoadScene(0);
-        gameStateManager.SwitchToState(GameState_Init.Instance);
+        LoadScene(2);
+        //gameStateManager.SwitchToState(GameState_Aim.Instance);
     }
 
     public void ReloadCurrentScene()
@@ -54,6 +85,11 @@ public class LevelManager : MonoBehaviour
         // InputManager.instance.SetActionMap_Gameplay();
     }
 
+    #endregion
+
+
+
+    // TODO: Move to GameStateManager?
     public void QuitGame()
     {
         Application.Quit();
@@ -65,14 +101,14 @@ public class LevelManager : MonoBehaviour
         int LevelCount = SceneManager.GetActiveScene().buildIndex;
         //Debug.Log("Scene Loaded: " + scene.name + " Build Index: " + scene.buildIndex);
 
-        if (scene.buildIndex == 0)
+        if (scene.buildIndex == 1)
         { 
             // main menu scene
             gameStateManager.SwitchToState(GameState_MainMenu.Instance);
 
         }
 
-        else if (scene.buildIndex > 0)
+        else if (scene.buildIndex > 1)
         {   
             gameStateManager.SwitchToState(GameState_Aim.Instance);
 

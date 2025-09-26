@@ -192,5 +192,10 @@ public class UIManager : MonoBehaviour
         return null;
     }
 
+    public void DetectAndSetUIForCurrentScene()
+    {
+   
 
+
+    }
 }
