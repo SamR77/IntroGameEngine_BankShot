@@ -511,11 +511,19 @@ PrefabInstance:
       objectReference: {fileID: 686215007}
     - target: {fileID: 2653680001215626223, guid: ad086f149fcb2884da004cf10529a35b, type: 3}
       propertyPath: m_VersionIndex
-      value: 12
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 2779027139107628531, guid: ad086f149fcb2884da004cf10529a35b, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847102986353784719, guid: ad086f149fcb2884da004cf10529a35b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.0105844
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847102986353784719, guid: ad086f149fcb2884da004cf10529a35b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -14.305745
       objectReference: {fileID: 0}
     - target: {fileID: 2953957451683928828, guid: ad086f149fcb2884da004cf10529a35b, type: 3}
       propertyPath: m_Mesh
@@ -577,13 +585,17 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5087441487331414023, guid: ad086f149fcb2884da004cf10529a35b, type: 3}
+      propertyPath: Radius
+      value: 14.99999
+      objectReference: {fileID: 0}
     - target: {fileID: 5248521243805181791, guid: ad086f149fcb2884da004cf10529a35b, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1375497240}
     - target: {fileID: 5248521243805181791, guid: ad086f149fcb2884da004cf10529a35b, type: 3}
       propertyPath: m_VersionIndex
-      value: 12
+      value: 21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

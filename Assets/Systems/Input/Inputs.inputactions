@@ -50,44 +50,22 @@
                 },
                 {
                     "name": "",
-                    "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
-                    "path": "<Touchscreen>/primaryTouch/tap",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Touch",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ee3d0cd2-254e-47a7-a8cb-bc94d9658c54",
-                    "path": "<Joystick>/trigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8255d333-5683-4943-a58a-ccb207ff1dce",
-                    "path": "<XRController>/{PrimaryAction}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
-                    "action": "Shoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b3c1c7f0-bd20-4ee7-a0f1-899b24bca6d7",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd704e64-adb5-4c12-84c0-b775b3cc0435",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -121,7 +99,7 @@
             "id": "5eeffb76-413b-4df0-975f-1b6a241cb74d",
             "actions": [
                 {
-                    "name": "RotateCamera",
+                    "name": "CameraRotate",
                     "type": "Value",
                     "id": "5ff4c85b-b286-47e6-855c-1df21bc724ad",
                     "expectedControlType": "Vector2",
@@ -130,36 +108,16 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseZoom",
-                    "type": "Value",
-                    "id": "41483876-5c83-43e7-ab07-1bfeb80cf758",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "GamepadZoom",
-                    "type": "Value",
-                    "id": "237b5c42-5340-454c-ac71-b2670c42fe97",
+                    "name": "CameraZoom",
+                    "type": "PassThrough",
+                    "id": "97eba8da-b98e-442d-9aeb-6209d5664bd0",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "a814feb4-b276-49fa-a098-5d0f0bc27662",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseZoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector - Mouse",
                     "id": "4cb59c0f-0a6c-46ff-b9f3-70809c2ad338",
@@ -167,7 +125,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RotateCamera",
+                    "action": "CameraRotate",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -177,8 +135,8 @@
                     "path": "<Mouse>/delta/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -188,8 +146,8 @@
                     "path": "<Mouse>/delta/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -199,8 +157,8 @@
                     "path": "<Mouse>/delta/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -210,8 +168,8 @@
                     "path": "<Mouse>/delta/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -222,7 +180,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RotateCamera",
+                    "action": "CameraRotate",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -232,8 +190,8 @@
                     "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
+                    "groups": ";Gamepad",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -243,8 +201,8 @@
                     "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
+                    "groups": ";Gamepad",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -254,8 +212,8 @@
                     "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
+                    "groups": ";Gamepad",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -265,41 +223,129 @@
                     "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "RotateCamera",
+                    "groups": ";Gamepad",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "1D Axis",
-                    "id": "7b38f72f-df6f-419e-a6cb-1130b6ca1c10",
+                    "name": "1D Axis - Keyboard",
+                    "id": "469228f1-3b70-42c7-bb37-199819837225",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GamepadZoom",
+                    "action": "CameraZoom",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "negative",
-                    "id": "5b55682e-cd7b-4c47-a157-4d963853912f",
-                    "path": "<Gamepad>/leftShoulder",
+                    "id": "47f19076-db9a-42b2-ad79-6346418a68b6",
+                    "path": "<Keyboard>/comma",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "GamepadZoom",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraZoom",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "positive",
-                    "id": "1ecfd8e8-18d3-4951-b9c8-e831f913b3df",
-                    "path": "<Gamepad>/rightShoulder",
+                    "id": "0e38fe92-39d3-4be4-b494-ba1b34466301",
+                    "path": "<Keyboard>/period",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis - MouseScroll",
+                    "id": "40c02a82-49bf-45ee-8a10-0508c2eaf315",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GamepadZoom",
+                    "action": "CameraZoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e521f876-afd7-4e37-9644-82b5057cdb44",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "fef7951a-0af6-49cd-a478-e8dbf281a289",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis - Gamepad",
+                    "id": "49c3bc3b-b00f-427d-8136-87ce0c68d873",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraZoom",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "15d195d8-4af5-4aec-b334-066746e823bf",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "6a6a081e-df8f-4a6b-9f74-7d4289944d84",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "f984afc7-4048-47ee-b910-17b4362a31ec",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "CameraZoom",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "a192d82c-6625-4a9f-9641-7deb2ef69914",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "CameraZoom",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
@@ -329,39 +375,6 @@
             "devices": [
                 {
                     "devicePath": "<Gamepad>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Touch",
-            "bindingGroup": "Touch",
-            "devices": [
-                {
-                    "devicePath": "<Touchscreen>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "Joystick",
-            "bindingGroup": "Joystick",
-            "devices": [
-                {
-                    "devicePath": "<Joystick>",
-                    "isOptional": false,
-                    "isOR": false
-                }
-            ]
-        },
-        {
-            "name": "XR",
-            "bindingGroup": "XR",
-            "devices": [
-                {
-                    "devicePath": "<XRController>",
                     "isOptional": false,
                     "isOR": false
                 }

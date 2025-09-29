@@ -36,12 +36,12 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
     // Events triggered when player inputs are detected
     
     
-    public event Action<Vector2> RotateCameraEvent;
-    public event Action<Vector2> ZoomCameraEvent;
+    public event Action<Vector2> CameraRotateEvent;
+    public event Action<Vector2> CameraZoomEvent;
 
     public event Action<InputAction.CallbackContext> ShootEvent;
 
-    public event Action<InputAction.CallbackContext> JumpEvent;
+    //public event Action<InputAction.CallbackContext> JumpEvent;
     public event Action PauseEvent;
 
     #endregion
@@ -59,7 +59,7 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
     }
 
     // Camera Input Methods
-    public void OnRotateCamera(InputAction.CallbackContext context)
+    public void OnCameraRotate(InputAction.CallbackContext context)
     {  
 
             Vector2 lookInput = context.ReadValue<Vector2>();
@@ -75,30 +75,28 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
                 lookInput *= gamePadSensitivity; // Scale down gamepad input for finer control
             }
 
-            RotateCameraEvent?.Invoke(lookInput);
+            CameraRotateEvent?.Invoke(lookInput);
         
     }
+
+    public void OnCameraZoom(InputAction.CallbackContext context)
+    {
+        float zoomValue = context.ReadValue<float>();
+        CameraZoomEvent?.Invoke(new Vector2(0, zoomValue));
+
+    }
+
 
     public void OnPause(InputAction.CallbackContext context)
     {
         PauseEvent?.Invoke();
     }
 
-    public void OnMouseZoom(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            ZoomCameraEvent?.Invoke(context.ReadValue<Vector2>());
-        }
-    }
 
-    public void OnGamepadZoom(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            ZoomCameraEvent?.Invoke(context.ReadValue<Vector2>());
-        }
-    }
+
+
+
+
 
 
 

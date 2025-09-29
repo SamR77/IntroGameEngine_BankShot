@@ -28,17 +28,21 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float rotationSpeed = 40f;
 
     [Header("Zoom Settings")]
-    [SerializeField] private float zoomSpeed = 5f;
+    [SerializeField] public float zoomSteps = 5;    
+ 
     [SerializeField] private float zoomLerpSpeed = 10f;
-    [SerializeField] private float minDistance = 3f;
-    [SerializeField] private float maxDistance = 15f;
+    [SerializeField] private float minZoom = 3f;
+    [SerializeField] private float maxZoom = 15f;
 
+    private int zoomIndex;
+    private float zoomStepDistance;
     private float targetZoom;
     private float currentZoom;
 
     // Input value references
     [SerializeField] private Vector2 rotationInput;
     [SerializeField] private Vector2 zoomInput;
+
 
     private void Awake()
     {
@@ -49,7 +53,11 @@ public class CameraManager : MonoBehaviour
 
         targetZoom = currentZoom = ballCamOrbitalFollow.Radius;
 
-
+        // Calculate initial zoom index based on current radius
+        zoomStepDistance = (maxZoom - minZoom) / zoomSteps;
+        zoomIndex = Mathf.RoundToInt((ballCamOrbitalFollow.Radius - minZoom) / zoomStepDistance);
+        zoomIndex = Mathf.Clamp(zoomIndex, 0, (int)zoomSteps);
+        targetZoom = currentZoom = minZoom + zoomIndex * zoomStepDistance;
     }
 
 
@@ -62,19 +70,20 @@ public class CameraManager : MonoBehaviour
     // Call these in Late Update during Aim_State
     public void HandleZoom()
     {
-        if (zoomInput.y != 0)
+        if (zoomInput.y != 0 && ballCamOrbitalFollow != null)
         {
-            if (ballCamOrbitalFollow != null)
-            { 
-                targetZoom = Mathf.Clamp(ballCamOrbitalFollow.Radius - zoomInput.y * zoomSpeed, minDistance, maxDistance);
+            int direction = (int)Mathf.Sign(zoomInput.y);
+            zoomIndex = Mathf.Clamp(zoomIndex - direction, 0, (int)zoomSteps);
 
-                zoomInput = Vector2.zero;
-
-            }
+            targetZoom = minZoom + zoomIndex * zoomStepDistance;
+            zoomInput = Vector2.zero;
         }
+
         currentZoom = Mathf.Lerp(currentZoom, targetZoom, Time.deltaTime * zoomLerpSpeed);
-        ballCamOrbitalFollow.Radius = currentZoom;
+        ballCamOrbitalFollow.Radius = currentZoom;       
     }
+
+
     public void HandleRotation()
     {
         float lookX = rotationInput.x * horizontalLookSensitivity * Time.deltaTime;
@@ -191,13 +200,13 @@ public class CameraManager : MonoBehaviour
 
     void OnEnable()
     {
-        inputManager.RotateCameraEvent += SetRotationInput;
-        inputManager.ZoomCameraEvent += SetZoomInput;
+        inputManager.CameraRotateEvent += SetRotationInput;
+        inputManager.CameraZoomEvent += SetZoomInput;
     }
     private void OnDestroy()
     {
-        inputManager.RotateCameraEvent -= SetRotationInput;
-        inputManager.ZoomCameraEvent -= SetZoomInput;
+        inputManager.CameraRotateEvent -= SetRotationInput;
+        inputManager.CameraZoomEvent -= SetZoomInput;
     }
 
 
