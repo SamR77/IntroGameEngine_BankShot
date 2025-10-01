@@ -53,3 +53,11 @@
     color: rgb(255, 255, 255);
     -unity-font-style: bold-and-italic;
 }
+
+.gameplayInfoPanel {
+    position: absolute;
+    width: 100%;
+    height: 20%;
+    align-self: auto;
+    align-items: center;
+}

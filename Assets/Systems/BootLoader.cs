@@ -53,7 +53,7 @@ public class BootLoader : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        Debug.Log("BootLoader Initialized.");
+        // Debug.Log("BootLoader Initialized.");
 
 
         #endregion
@@ -62,7 +62,7 @@ public class BootLoader : MonoBehaviour
 
     public void Test()
     {
-        Debug.Log("BootLoader Scene is active");
+        // Debug.Log("BootLoader Scene is active");
     }
 
 }

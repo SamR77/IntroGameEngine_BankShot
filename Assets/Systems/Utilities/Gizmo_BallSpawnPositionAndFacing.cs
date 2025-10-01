@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-// Sam Robichaud 
-// NSCC Truro 2024
-
 public class Gizmo_BallSpawnPositionAndFacing : MonoBehaviour
 {
     void OnDrawGizmos()

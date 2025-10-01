@@ -1,10 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
-// Sam Robichaud 
-// NSCC Truro 2025
-// This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
 public class CameraManager : MonoBehaviour
 {
     [Header("Manager References")]
@@ -186,16 +182,7 @@ public class CameraManager : MonoBehaviour
         menuCamera.enabled = false;
     }
 
-    public void ResetCameraPosition()
-    {
-        Debug.Log("Called Reset Camera Position in CameraManager, Logic not yet set");
-
-        //var offset = freeLookCamera.LookAt.rotation * new Vector3(0, 0, -14);
-
-        //freeLookCamera.ForceCameraPosition(freeLookCamera.LookAt.position + offset, freeLookCamera.LookAt.rotation);
-        //freeLookCamera.m_YAxis.Value = 0.5f;
-    }
-
+    
 
 
     void OnEnable()

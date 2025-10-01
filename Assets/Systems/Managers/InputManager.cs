@@ -11,6 +11,25 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
     [SerializeField] float mouseSensitivity = 1.0f;
     [SerializeField] float gamePadSensitivity = 1.0f;
 
+    private InputDevice inputDevice;
+
+    // Input Device type
+    public enum InputDeviceType
+    {
+        KeyboardAndMouse,
+        Gamepad,
+        Unknown
+    }
+
+    private InputDeviceType currentInputDevice;
+
+    // read only public accessor for scripts to check current input device, who may not be subscribed to the event
+    public InputDeviceType CurrentInputDevice => currentInputDevice;
+
+
+
+
+
     public void Awake()
     {
         // Initialize the Input System
@@ -18,31 +37,37 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
         {
             inputs = new Inputs();
 
-            inputs.Game.SetCallbacks(this); // Set the callbacks for the Ball action map
-            inputs.Game.Enable(); // Enables the "Ball" action map
+            inputs.Game.SetCallbacks(this); 
+            inputs.Game.Enable();
 
-            inputs.Camera.SetCallbacks(this); // Set the callbacks for the Camera action map
-            inputs.Camera.Enable(); // Enables the "Camera" action map
+            inputs.Camera.SetCallbacks(this);
+            inputs.Camera.Enable();
+
+            // Default assumption: keyboard and mouse
+            currentInputDevice = InputDeviceType.KeyboardAndMouse;
 
         }
+
         catch (Exception exception)
         {
             Debug.LogError("Error initializing InputManager: " + exception.Message);
         }
     }
 
+
     #region Input Events
 
     // Events triggered when player inputs are detected
-    
-    
+
+
     public event Action<Vector2> CameraRotateEvent;
     public event Action<Vector2> CameraZoomEvent;
 
     public event Action<InputAction.CallbackContext> ShootEvent;
 
-    //public event Action<InputAction.CallbackContext> JumpEvent;
     public event Action PauseEvent;
+
+    public event Action<InputDeviceType> InputDeviceChanged;
 
     #endregion
 
@@ -86,11 +111,12 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
 
     }
 
-
     public void OnPause(InputAction.CallbackContext context)
     {
         PauseEvent?.Invoke();
     }
+
+
 
 
 
@@ -107,6 +133,51 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
 
 
 
+    private void OnActionChange(object obj, InputActionChange change)
+    {
+        if (change == InputActionChange.ActionPerformed && obj is InputAction action)
+        {
+            var recentInputDevice = action.activeControl?.device;
+
+            if (recentInputDevice != null && recentInputDevice != inputDevice)
+            {
+                // set the input device to the lastUsedDevice to stop the check
+                inputDevice = recentInputDevice;
+
+                InputDeviceType newInputDevice;
+
+                // Determine the type of inputDevice last used (or last saw activity)
+                if (recentInputDevice is Gamepad)
+                {
+                    newInputDevice = InputDeviceType.Gamepad;
+                }
+
+                else if (recentInputDevice is Keyboard || recentInputDevice is Mouse)
+                {
+                    newInputDevice = InputDeviceType.KeyboardAndMouse;
+                }
+
+                else
+                {
+                      newInputDevice = InputDeviceType.Unknown;                    
+                }
+
+                // If the input device has changed, update and invoke the event
+                if (newInputDevice != currentInputDevice)
+                {
+                    currentInputDevice = newInputDevice;
+                    InputDeviceChanged?.Invoke(currentInputDevice);
+                    // Debug.Log($"Input device changed to: {newInputDevice}");
+
+                }
+
+
+            }
+        }
+    }
+
+
+
 
 
 
@@ -116,6 +187,9 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
         {
             inputs.Game.Enable();
             inputs.Camera.Enable();
+
+            InputSystem.onActionChange += OnActionChange;
+
         }
     }
     void OnDisable()
@@ -124,6 +198,8 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
         {
             inputs.Game.Disable();
             inputs.Camera.Disable();
+
+            InputSystem.onActionChange -= OnActionChange;
         }
     }
 

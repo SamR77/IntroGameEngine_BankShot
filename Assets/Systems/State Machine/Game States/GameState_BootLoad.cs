@@ -35,7 +35,7 @@ public class GameState_BootLoad : IGameState
         // if BootLoader is the only active scene, redirect to MainMenu
         if (SceneManager.sceneCount == 1 && SceneManager.GetActiveScene().name == "BootLoader")
         {
-            Debug.Log("BootLoader is the only active scene. Loading MainMenu...");
+            // Debug.Log("BootLoader is the only active scene. Loading MainMenu...");
             GameManager.Instance.LevelManager.LoadMainMenu();
             return;
         }

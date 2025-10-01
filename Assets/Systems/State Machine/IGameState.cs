@@ -1,7 +1,3 @@
-// Sam Robichaud 
-// NSCC Truro 2025
-// This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
 // Defines the methods required for implementing a game state in the state machine.
 // Each game state should implement this interface to ensure consistent behavior.
 

@@ -1,7 +1,3 @@
-// Sam Robichaud 
-// NSCC Truro 2025
-// This work is licensed under CC BY-NC-SA 4.0 (https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -66,7 +62,7 @@ public class LevelManager : MonoBehaviour
     public void LoadMainMenu()
     {
         LoadScene(1);
-        Debug.Log("Loading Main Menu...");
+        // Debug.Log("Loading Main Menu...");
         gameStateManager.SwitchToState(GameState_MainMenu.Instance);
     }
 
@@ -123,7 +119,7 @@ public class LevelManager : MonoBehaviour
             //Debug.Break();
 
             // Set the camera to the current level start position
-            cameraManager.ResetCameraPosition();
+            // cameraManager.ResetCameraPosition();
         }
 
       

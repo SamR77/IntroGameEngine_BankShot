@@ -50,7 +50,7 @@ public class MainMenuUIController : MonoBehaviour
     #region Button Actions
     private void OnPlayButtonClicked()
     {
-        Debug.Log("Play Button Clicked");
+        // Debug.Log("Play Button Clicked");
         levelManager.LoadFirstLevel();
 
         //levelManager.LoadScene(2);
