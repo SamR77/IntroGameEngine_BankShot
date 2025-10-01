@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraActions
+public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraActions, Inputs.IUIActions
 {
     // Reference to the generated Input System class
     private Inputs inputs;
@@ -38,10 +38,14 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
             inputs = new Inputs();
 
             inputs.Game.SetCallbacks(this); 
-            inputs.Game.Enable();
+            inputs.Game.Enable();            
 
             inputs.Camera.SetCallbacks(this);
             inputs.Camera.Enable();
+
+            // enable UI action map for menu navigation
+            inputs.UI.SetCallbacks(this);
+            inputs.UI.Enable();
 
             // Default assumption: keyboard and mouse
             currentInputDevice = InputDeviceType.KeyboardAndMouse;
@@ -66,6 +70,9 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
     public event Action<InputAction.CallbackContext> ShootEvent;
 
     public event Action PauseEvent;
+
+    public event Action<Vector2> NavigateEvent;
+    public event Action SubmitEvent;
 
     public event Action<InputDeviceType> InputDeviceChanged;
 
@@ -121,13 +128,6 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
 
 
 
-
-
-
-
-
-
-
     #endregion
 
 
@@ -177,6 +177,32 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
     }
 
 
+    #region UI Navigation
+    public void OnNavigate(InputAction.CallbackContext context) 
+    {
+        if (context.performed)
+        {
+            NavigateEvent?.Invoke(context.ReadValue<Vector2>());
+        }
+    }
+    public void OnSubmit(InputAction.CallbackContext context) 
+    {
+        Debug.Log("Submit action performed");
+
+        if (context.performed)
+        {
+            SubmitEvent?.Invoke();
+        }
+    }
+    public void OnCancel(InputAction.CallbackContext context) {}
+    public void OnPoint(InputAction.CallbackContext context) {}
+    public void OnClick(InputAction.CallbackContext context) {}
+    public void OnRightClick(InputAction.CallbackContext context) {}
+    public void OnMiddleClick(InputAction.CallbackContext context) {}
+    public void OnScrollWheel(InputAction.CallbackContext context) {}
+    public void OnTrackedDevicePosition(InputAction.CallbackContext context) {}
+    public void OnTrackedDeviceOrientation(InputAction.CallbackContext context) {}
+    #endregion
 
 
 
@@ -188,19 +214,27 @@ public class InputManager : MonoBehaviour, Inputs.IGameActions, Inputs.ICameraAc
             inputs.Game.Enable();
             inputs.Camera.Enable();
 
+            inputs.UI.Enable();
+
             InputSystem.onActionChange += OnActionChange;
 
         }
     }
-    void OnDisable()
+    void OnDestroy()
     {
         if (inputs != null)
         {
             inputs.Game.Disable();
             inputs.Camera.Disable();
 
+            inputs.UI.Disable();
+
             InputSystem.onActionChange -= OnActionChange;
         }
     }
 
+    
 }
+
+
+

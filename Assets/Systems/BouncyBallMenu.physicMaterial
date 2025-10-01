@@ -6,10 +6,10 @@ PhysicsMaterial:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BouncyBall
+  m_Name: BouncyBallMenu
   serializedVersion: 2
   m_DynamicFriction: 0.25
   m_StaticFriction: 0.25
-  m_Bounciness: 0.6
+  m_Bounciness: 0.75
   m_FrictionCombine: 0
   m_BounceCombine: 0

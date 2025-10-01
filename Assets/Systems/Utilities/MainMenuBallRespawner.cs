@@ -37,20 +37,27 @@ public class MainMenuBallRespawner : MonoBehaviour
 
         Vector3 worldPos = ballSpawnArea.TransformPoint(localPos);
 
+
+
         GameObject go = Instantiate(ball, worldPos, transform.rotation, this.transform);
-        go.GetComponentInChildren<MeshRenderer>().material.color = new Color(
-            Random.Range(0f, 1f),
-            Random.Range(0f, 1f),
-            Random.Range(0f, 1f),
-            Random.Range(0f, 1f)
+
+        Color saturatedColor = Color.HSVToRGB(
+            Random.Range(0f, 1f), // Hue: full spectrum
+            Random.Range(0.8f, 1f), // Saturation: high values only
+            Random.Range(0.8f, 1f)  // Value (brightness): high values only
         );
+        
+        saturatedColor.a = 1f; // Optional: set alpha to fully opaque
+
+        go.GetComponentInChildren<MeshRenderer>().material.color = saturatedColor;
+
 
 
     }
 
 
-   
-    
+
+
 
 
 

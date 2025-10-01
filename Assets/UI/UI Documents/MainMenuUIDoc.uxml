@@ -6,7 +6,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="MenuButtons" style="width: 400px; padding-top: 25px;">
             <ui:Button text="PLAY" name="PlayButton" class="menu-button" />
-            <ui:Button text="OPTIONS" name="OptionsButton" enabled="false" style="font-size: 65px; -unity-font-definition: url(&quot;project://database/Assets/Art/UI/Fonts/Bangers/Bangers-Regular.ttf?fileID=12800000&amp;guid=6e65d03e979670646a596000bb47e4c3&amp;type=3#Bangers-Regular&quot;); color: rgba(101, 101, 101, 0.69); -unity-text-outline-width: 3px; -unity-text-outline-color: rgba(0, 0, 0, 0.53); -unity-font-style: bold-and-italic; background-color: rgba(149, 149, 149, 0); border-left-color: rgba(126, 126, 126, 0); border-right-color: rgba(126, 126, 126, 0); border-top-color: rgba(126, 126, 126, 0); border-bottom-color: rgba(126, 126, 126, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+            <ui:Button name="OptionsButton" enabled="false" text="OPTIONS" class="menu-button-disabled" />
             <ui:Button text="QUIT" name="QuitButton" class="menu-button" />
         </ui:VisualElement>
     </ui:VisualElement>

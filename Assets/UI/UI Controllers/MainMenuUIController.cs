@@ -17,9 +17,15 @@ public class MainMenuUIController : MonoBehaviour
     GameStateManager gameStateManager => GameManager.Instance.GameStateManager;
     LevelManager levelManager => GameManager.Instance.LevelManager;
 
+    InputManager inputManager => GameManager.Instance.InputManager;
+
     Button playButton;
     Button optionsButton;
     Button quitButton;
+
+    private Button[] menuButtons;
+    private int focusedIndex = 0;
+
 
     #region Setup Button references and Listeners
     private void OnEnable()
@@ -33,17 +39,33 @@ public class MainMenuUIController : MonoBehaviour
         optionsButton.clicked += OnOptionsButtonClicked;
         quitButton.clicked += OnQuitButtonClicked;
 
+        inputManager.NavigateEvent += OnNavigate;
+        inputManager.SubmitEvent += OnSubmit;
+
         // Check to make sure buttons are found
         if (playButton == null) Debug.LogError("Play Button not found in MainMenu_UIDoc");
         if (optionsButton == null) Debug.LogError("Options Button not found in MainMenu_UIDoc");
         if (quitButton == null) Debug.LogError("Quit Button not found in MainMenu_UIDoc");
+
+        // Set initial focus to Play button for better UX
+        playButton.Focus();
+
+        menuButtons = new[] { playButton, optionsButton, quitButton };
+        focusedIndex = 0;
+        menuButtons[focusedIndex].Focus();
+
+
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         playButton.clicked -= OnPlayButtonClicked;
         optionsButton.clicked -= OnOptionsButtonClicked;
         quitButton.clicked -= OnQuitButtonClicked;
+
+        inputManager.NavigateEvent -= OnNavigate;
+        inputManager.SubmitEvent -= OnSubmit;
+
     }
     #endregion
 
@@ -67,6 +89,31 @@ public class MainMenuUIController : MonoBehaviour
         Debug.Log("Quit Button Clicked");
         Application.Quit();        
     }
+    #endregion
+
+    #region UI Navigation Actions
+
+    private void OnNavigate(Vector2 direction)
+    {
+        // Only allow navigation if the main menu is active
+        if (uIManager.MainMenuUI.rootVisualElement.style.display == DisplayStyle.Flex)
+        {
+            Debug.Log($"Navigate: {direction}");
+
+        }
+    }
+
+    private void OnSubmit()
+    {
+        // Only allow submit if the main menu is active
+        if (uIManager.MainMenuUI.rootVisualElement.style.display == DisplayStyle.Flex)
+        {
+            Debug.Log("Submit");
+        }
+       
+    }
+
+
     #endregion
 }
 
